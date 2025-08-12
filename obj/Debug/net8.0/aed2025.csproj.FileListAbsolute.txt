@@ -1,0 +1,15 @@
+/workspaces/aed2025/bin/Debug/net8.0/aed2025
+/workspaces/aed2025/bin/Debug/net8.0/aed2025.deps.json
+/workspaces/aed2025/bin/Debug/net8.0/aed2025.runtimeconfig.json
+/workspaces/aed2025/bin/Debug/net8.0/aed2025.dll
+/workspaces/aed2025/bin/Debug/net8.0/aed2025.pdb
+/workspaces/aed2025/obj/Debug/net8.0/aed2025.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/aed2025/obj/Debug/net8.0/aed2025.AssemblyInfoInputs.cache
+/workspaces/aed2025/obj/Debug/net8.0/aed2025.AssemblyInfo.cs
+/workspaces/aed2025/obj/Debug/net8.0/aed2025.csproj.CoreCompileInputs.cache
+/workspaces/aed2025/obj/Debug/net8.0/aed2025.sourcelink.json
+/workspaces/aed2025/obj/Debug/net8.0/aed2025.dll
+/workspaces/aed2025/obj/Debug/net8.0/refint/aed2025.dll
+/workspaces/aed2025/obj/Debug/net8.0/aed2025.pdb
+/workspaces/aed2025/obj/Debug/net8.0/aed2025.genruntimeconfig.cache
+/workspaces/aed2025/obj/Debug/net8.0/ref/aed2025.dll
