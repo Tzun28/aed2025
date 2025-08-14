@@ -5,12 +5,10 @@ class Program {
     {
 
         int n = int.Parse(Console.ReadLine());
-        string va;
         string[] v = new string[2];
         double[] vdouble = new double[2];
         double valorperc, valorcxb;
-        va = Console.ReadLine().Replace(".", ",");
-        v = va.Split(" ");
+        v = Console.ReadLine().Split(" ");
         vdouble[0] = double.Parse(v[0]);
         vdouble[1] = double.Parse(v[1]);
         valorcxb = double.Parse(v[0])*2;
@@ -25,7 +23,7 @@ class Program {
             if (valorperc < valorcxb) { valorcxb = valorperc; }
 
         }
-        Console.WriteLine(valorcxb*1.00);
+        Console.WriteLine($"{valorcxb:F2}");
 
         
     }
