@@ -1,0 +1,26 @@
+using System;
+
+class Program {
+    public static void Main()
+    {
+        int repeticoes = int.Parse(Console.ReadLine());
+        double a, b ,c;
+        double[] vettri = new double[3];
+        for (int r = 0; r < repeticoes; r++)
+        {
+            string[] triangulo = Console.ReadLine().Split(" ");
+            for (int z = 0; z < 3; z++) { vettri[z] = double.Parse(triangulo[z]); }
+            if (vettri[0] >= vettri[1] && vettri[0] >= vettri[2]) { a = vettri[0]; b = vettri[1]; c = vettri[2]; }
+            else if (vettri[1] > vettri[0] && vettri[1] >= vettri[2]) { a = vettri[1]; b = vettri[0]; c = vettri[2]; }
+            else { a = vettri[2]; b = vettri[1]; c = vettri[0]; }
+            if (a >= b + c) { Console.WriteLine("n"); }
+            else if (Math.Pow(a, 2) == Math.Pow(b, 2) + Math.Pow(c, 2)) { Console.WriteLine("r"); }
+            else if (Math.Pow(a, 2) > Math.Pow(b, 2) + Math.Pow(c, 2)) { Console.WriteLine("o"); }
+            else if (Math.Pow(a, 2) < Math.Pow(b, 2) + Math.Pow(c, 2)) { Console.WriteLine("a"); }
+            
+
+        }
+    }
+}
+
+

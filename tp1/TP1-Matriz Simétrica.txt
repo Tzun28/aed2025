@@ -1,0 +1,39 @@
+﻿using System;
+
+class Program{
+
+    public static void Main()
+    {
+        string[] linhacoluna = Console.ReadLine().Split(" ");
+        int a = int.Parse(linhacoluna[0]);
+        int b = int.Parse(linhacoluna[1]);
+        int res = 1;
+        int[,] matriz  = new int[a, b];
+        string[] matrizres;
+        int[,] matrizinvert  = new int[a, b];
+        if (a != b) { res = 0; }
+        else
+        {
+            for (int x = 0; x < b; x++)
+            {
+                matrizres = Console.ReadLine().Split(" ");
+                for (int y = 0; y < a; y++)
+                {
+                    matriz[y, x] = int.Parse(matrizres[y]);
+                }
+            }
+            for (int x = 0; x < a; x++)
+            {
+                for (int y = 0; y < b; y++)
+                {
+                    matrizinvert[x, y] = matriz[y, x];
+                    if (matrizinvert[x, y] != matriz[x, y])
+                    {
+                        res = 0;
+                    }
+                }
+            }
+        }
+        Console.WriteLine(res);
+    }
+}

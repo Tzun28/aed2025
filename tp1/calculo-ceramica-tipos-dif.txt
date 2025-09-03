@@ -1,0 +1,18 @@
+using System;
+
+class Program
+{
+    public static void Main()
+    {
+
+        /*retângulo de largura L metros e comprimento C metros*/
+        int lar = int.Parse(Console.ReadLine());
+        int com = int.Parse(Console.ReadLine());
+        int tipoum = (lar * com) + ((lar - 1) * (com - 1));
+        int tipodois = ((com - 1) * 2) + ((lar - 1) * 2);
+        Console.WriteLine(tipoum);
+        Console.WriteLine(tipodois);
+        
+
+    }
+}
