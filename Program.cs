@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-class Program
-{
+﻿class Program {
     public static void Main()
-    {
-        int soma = 0;
-        List<int> numeros = new List<int>();
-        for (int a = 1; a <= 100; a++)/*Também da para pular fazendo a+=2 que aí ia pegar só ímpar*/
-        {
-            if (a % 2 != 0) { numeros.Add(a); }
-        }
-        foreach (int elemento in numeros)
-        {
-            soma += elemento;
-        }
-        Console.WriteLine("A soma é " + soma);
-    }
+{
+
+    /*retângulo de largura L metros e comprimento C metros*/
+    int lar = int.Parse(Console.ReadLine());
+    int com = int.Parse(Console.ReadLine());
+    int tipoum = (lar * com) + ((lar - 1) * (com - 1));
+    int tipodois = ((com - 1) * 2) + ((lar - 1) * 2);
+    Console.WriteLine(tipoum);
+    Console.WriteLine(tipodois);
+
+
+}
 }
