@@ -1,0 +1,23 @@
+using System;
+using System.Collections.Generic;
+namespace Pratica{
+    class Questum
+    {
+        public static void Main()
+        {
+            /*Crie uma List<int> e adicione 10 números inteiros informados pelo usuário. Em
+            seguida, imprima todos os elementos com foreach.*/
+            List<int> numero = new List<int>();
+            for (int a = 0; a < 10; a++)
+            {
+                numero.Add(int.Parse(Console.ReadLine()));
+            }
+            Console.WriteLine("_________________________________________");
+            foreach (int number in numero)
+            {
+                Console.WriteLine(number);
+            }
+
+        }
+    }
+}

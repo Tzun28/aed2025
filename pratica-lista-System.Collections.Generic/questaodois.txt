@@ -1,0 +1,22 @@
+using System;
+using System.Collections.Generic;
+/*Crie uma List<string> e adicione 5 nomes informados pelo usuário. Depois,
+imprima-os em ordem inversa.*/
+class Program
+{
+    public static void Main()
+    {
+        List<string> nomes = new List<string>();
+        for (int a = 0; a < 5; a++)
+        {
+            Console.WriteLine("Digite um nome");
+            nomes.Add(Console.ReadLine());    
+        }
+        Console.WriteLine("---------------------------");
+        for (int no = nomes.Count() - 1; no >= 0; no--)
+        {
+            Console.WriteLine("Repetindo nomes ao contrário: " + nomes[no]);
+        }
+        /*Também dá para fazer um .Reverse() que a lista era invertida, daí é só escrever na ordem.*/
+    }
+}
