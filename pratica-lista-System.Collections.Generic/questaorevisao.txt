@@ -1,0 +1,35 @@
+using System;
+using System.Collections.Generic;
+class Program
+{
+    public static void Main()
+    {
+        List<int> Algo = new List<int>();
+        Random sorteio = new Random();
+        Algo.Add(sorteio.Next(3, 30));
+        Algo.Add(sorteio.Next(80, 90));
+        Algo.Add(sorteio.Next(5, 60));
+        Algo.Add(sorteio.Next(200, 300));
+        Algo.Add(sorteio.Next(0, 3));
+        List<int> Inversa = Reversao(Algo);
+        foreach (int item in Algo)
+        {
+            Console.WriteLine(item);
+        }
+        Console.WriteLine("------------------");
+        foreach (int item in Inversa)
+        {
+            Console.WriteLine(item);
+        }
+    }
+    
+    public static List<t> Reversao<t>(List<t> original)
+    {
+        List<t> Algumacoisa = new List<t>();
+        for (int a = original.Count() - 1; a >= 0; a--)
+        {
+            Algumacoisa.Add(original[a]);
+        }
+        return Algumacoisa;
+    }
+}

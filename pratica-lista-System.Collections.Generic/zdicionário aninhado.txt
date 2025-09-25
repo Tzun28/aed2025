@@ -1,0 +1,35 @@
+using System;
+using System.Collections.Generic;
+class Program {
+    public static void Main()
+    {
+        Dictionary<string, Dictionary<int, Dictionary<string, List<string>>>> Campeonatos = new Dictionary<string, Dictionary<int, Dictionary<string, List<string>>>>
+        {
+            ["MG"] = new Dictionary<int, Dictionary<string, List<string>>>
+            {
+                [2025] = new Dictionary<string, List<string>>
+                {
+                    ["Cruzeiro"] = new List<string>
+                    {
+                        "Kaio Jorge", "Matheus Pereira", "Lucas Silva"
+                    }
+                    ,
+                    ["Flamingo"] = new List<string>
+                    {
+                        "Pequeno", "Nanico"
+                    }
+                }
+                ,
+                [2024] = new Dictionary<string, List<string>>
+                {
+                    ["Cruzeiro"] = new List<string>
+                  {
+                    "Mateus Vital","Wesley Ruim"
+                  }
+                }
+            }
+        };
+        Campeonatos["MG"][2025]["Cruzeiro"].Add("Sinisterra");
+        Campeonatos["RJ"] = new Dictionary<int, Dictionary<string, List<string>>>();
+    }
+}
