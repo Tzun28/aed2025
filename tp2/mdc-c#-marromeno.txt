@@ -1,0 +1,23 @@
+using System;
+    class Program{
+        public static void Main(){
+            int rep = int.Parse(Console.ReadLine());
+            Executa(--rep);
+        }
+        public static void Executa(int z){
+            string[] valores = Console.ReadLine().Split(" ");
+            int x = int.Parse(valores[0]);
+            int y = int.Parse(valores[1]);
+            int mdiv = 1;
+            MDC(x,y, ref mdiv);
+            Console.WriteLine(mdiv);
+            mdiv = 1;
+            if (z != 0 && z > 0) {Executa(--z); }
+        }
+    public static void MDC(int varium, int varidois, ref int maxdivisor)
+    {
+        if (varidois == 0) { maxdivisor = varium; }
+        else { MDC(varidois, varium % varidois, ref maxdivisor); }
+    }
+                    
+}

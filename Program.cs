@@ -1,23 +1,20 @@
 ﻿using System;
-    class Program{
-        public static void Main(){
-            int rep = int.Parse(Console.ReadLine());
-            Executa(--rep);
-        }
-        public static void Executa(int z){
-            string[] valores = Console.ReadLine().Split(" ");
-            int x = int.Parse(valores[0]);
-            int y = int.Parse(valores[1]);
-            int mdiv = 1;
-            MDC(x,y, ref mdiv);
-            Console.WriteLine(mdiv);
-            mdiv = 1;
-            if (z != 0 && z > 0) {Executa(--z); }
-        }
-    public static void MDC(int varium, int varidois, ref int maxdivisor)
-    {
-        if (varidois == 0) { maxdivisor = varium; }
-        else { MDC(varidois, varium % varidois, ref maxdivisor); }
+using System.Collections.Generic;
+class Program{
+    public static void Main(){
+        Random r = new Random();
+        Queue<int> Tetetetestando = new Queue<int>();
+        Tetetetestando.Enqueue(r.Next(0, 100)); Tetetetestando.Enqueue(r.Next(0, 100)); Tetetetestando.Enqueue(r.Next(0, 100));
+        List<int> Rei = new List<int>();
+        Rei = Copiafilapralista(Tetetetestando);
+        foreach(int a in Rei){ Console.WriteLine(a); }
     }
-                    
+    public static List<t> Copiafilapralista<t>(Queue<t> Recebe){
+    List<t> Nova = new List<t>();
+    foreach (t elemento in Recebe)
+    {
+        Nova.Add(elemento);
+    }
+    return Nova;
+    }
 }
