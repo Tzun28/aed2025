@@ -1,0 +1,23 @@
+using System;
+using System.Collections.Generic;
+    class Program{
+    public static void Main()
+    {
+        Random r = new Random();
+        List<int> Tetetetestando = new List<int>();
+        Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100));
+        List<int> Rei = new List<int>();
+        Rei = Copialista(Tetetetestando);
+        foreach(int a in Rei){ Console.WriteLine(a); }
+        }
+    public static List<t> Copialista<t>(List<t> Recebe)
+    {
+
+        List<t> Nova = new List<t>();
+        foreach (t elemento in Recebe)
+        {
+            Nova.Add(elemento);
+        }
+        return Nova;
+        }
+}
