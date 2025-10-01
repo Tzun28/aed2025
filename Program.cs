@@ -23,9 +23,21 @@ class Program
     }
     public static void Apagalist2<T>(ref List<T> Recebe, int comeco, int qtd)
     {
-        for (int z = qtd ; z > 0; z--)
+        int calc = Recebe.Count() - comeco;
+        if (qtd > calc)
         {
-            Recebe.RemoveAt(comeco-1);
+            int total = Recebe.Count();
+            for (int z = comeco; z < total;z++)
+            {
+                Recebe.RemoveAt(comeco - 1);
+
+            }
+        }
+        else {
+            for (int z = qtd; z > 0; z--)
+            {
+                Recebe.RemoveAt(comeco - 1);
+            }
         }
     }
 }
