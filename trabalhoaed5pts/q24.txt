@@ -1,0 +1,45 @@
+
+using System;
+using System.Collections.Generic;
+class Program
+{
+    public static void Main()
+    {
+        Dictionary<string, Dictionary<string, double>> Continentes = new Dictionary<string, Dictionary<string, double>>
+        {
+            ["Asia"] = new Dictionary<string, double>
+            {
+                ["Japão"] = 125507472
+                ,
+                ["China"] = 1394016000
+                ,
+                ["Tailândia"] = 68977400
+            },
+            ["Américas"] = new Dictionary<string, double>
+            {
+                ["Brasil"] = 211715968
+                ,
+                ["Chile"] = 18186770
+                ,
+                ["Argentina"] = 45479120
+            },
+            ["Europa"] = new Dictionary<string, double>
+            {
+                ["França"] = 67848160
+                ,
+                ["Alemanha"] = 80159664
+                ,
+                ["Suécia"] = 10202491
+            }
+        };
+        foreach (var continente in Continentes)
+        {
+            foreach (var pais in continente.Value)
+            {
+                Console.WriteLine("País: " + pais.Key + " - População: " + pais.Value);
+            }
+        }
+        
+    }
+    
+}

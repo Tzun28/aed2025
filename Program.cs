@@ -4,31 +4,28 @@ class Program
 {
     public static void Main()
     {
-        Dictionary<string, List<string>> Montadoras = new Dictionary<string, List<string>> {
-            ["Fiat"] = new List<string>
-                {
-                "Fiorino", "Argo","Pulse","Cronos","Fastback","Strada","Mobi","Toro","Titano"
-                }
-            ,["Volkswagen"] = new List<string>
-                {
-                    "Taos", "Voyage","Polo","Tera","Amarok","Nivus","Golf","Jetta","Tiguan"
-                }
-            ,
-            ["Hyundai"] = new List<string>
-                {
-                    "Creta","HB20","HB20S","Kona","Tucson"
-                }
-            ,
-            ["GM"] = new List<string>
-                {
-                    "Onix", "Tracker","S10","Spin","Montana"
-                }
-        };
-        Console.WriteLine("Digite o nome da montadora para descobrir quantidade e nomes de carro");
-        string marca = Console.ReadLine();
-        Console.WriteLine("Quantidade de modelos: " + Montadoras[marca].Count());
-        foreach (string a in Montadoras[marca]) {
-            Console.Write(a + " | ");
+        Random r = new Random();
+        List<int> Tetetetestando = new List<int>();
+        Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100));
+        Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100));
+        Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100));
+        Console.WriteLine("Digite o início do apagar");
+        int a = int.Parse(Console.ReadLine());
+        Console.WriteLine("Digite a quantidade para apagar");
+        int b = int.Parse(Console.ReadLine());
+        Console.WriteLine(Tetetetestando.Count());
+        foreach (int elemento in Tetetetestando){ Console.Write("| " + elemento); }
+        Apagalist2(ref Tetetetestando, a, b);
+        Console.WriteLine(" ");
+        Console.WriteLine(Tetetetestando.Count());
+        foreach (int elemento in Tetetetestando){ Console.Write("| " + elemento); }
+       
+    }
+    public static void Apagalist2<T>(ref List<T> Recebe, int comeco, int qtd)
+    {
+        for (int z = qtd ; z > 0; z--)
+        {
+            Recebe.RemoveAt(comeco-1);
         }
     }
 }
