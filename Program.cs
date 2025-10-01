@@ -5,39 +5,33 @@ class Program
     public static void Main()
     {
         Random r = new Random();
-        List<int> Tetetetestando = new List<int>();
-        Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100));
-        Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100));
-        Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100));
-        Console.WriteLine("Digite o início do apagar");
-        int a = int.Parse(Console.ReadLine());
-        Console.WriteLine("Digite a quantidade para apagar");
-        int b = int.Parse(Console.ReadLine());
-        Console.WriteLine(Tetetetestando.Count());
-        foreach (int elemento in Tetetetestando){ Console.Write("| " + elemento); }
-        Apagalist2(ref Tetetetestando, a, b);
+        List<int> a = new List<int>();
+        List<int> b = new List<int>();
+        for (int z = 0; z < 5; z++) { a.Add(r.Next(0, 100)); }
+        for (int z = 0; z < 5; z++) { b.Add(r.Next(0, 100)); }
+        b.Add(5);b.Add(8);b.Add(8);b.Add(9);
+        a.Add(5);a.Add(8);a.Add(8);a.Add(9);
+        List<int> c = Intersecao(a, b);
         Console.WriteLine(" ");
-        Console.WriteLine(Tetetetestando.Count());
-        foreach (int elemento in Tetetetestando){ Console.Write("| " + elemento); }
-       
-    }
-    public static void Apagalist2<T>(ref List<T> Recebe, int comeco, int qtd)
-    {
-        int calc = Recebe.Count() - comeco;
-        if (qtd > calc)
+        foreach (int elemanto in c)
         {
-            int total = Recebe.Count();
-            for (int z = comeco; z < total;z++)
-            {
-                Recebe.RemoveAt(comeco - 1);
 
+            Console.Write(elemanto + " |");
+        }
+        Console.WriteLine(" ");
+    }
+    public static List<T> Intersecao<T>(List<T> l1, List<T> l2)
+    {
+        List<T> l3 = new List<T>();
+        foreach (T elemento in l1)
+        {
+            if (l2.Contains(elemento)) {
+                if (l3.Contains(elemento)) { }
+                else {
+                    l3.Add(elemento);
+                }
             }
         }
-        else {
-            for (int z = qtd; z > 0; z--)
-            {
-                Recebe.RemoveAt(comeco - 1);
-            }
-        }
+        return l3;
     }
 }
