@@ -1,35 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-class Program{
+class Program
+{
     public static void Main()
     {
-
-        Dictionary<string, string> Tomaoip = new Dictionary<string, string>
-        {
-            ["www.google.com"] = "216.239.38.120",
-            ["www.pucminas.br"] = "200.229.32.28",
-            ["www.gmail.com"] = "172.217.28.197",
-            ["www.youtube.com"] = "172.217.162.14",
-            ["www.capes.com"] = "23.227.38.74",
-            ["www.yahoo.com"] = "200.152.162.137",
-            ["www.microsoft.com"] = "23.212.153.219",
-            ["www.x.com"] = "162.159.140.229",
-            ["www.brasil.gov.br"] = "[170.246.255.242",
-            ["www.wikipedia.com"] = "195.200.68.226",
-            ["www.amazom.com"] = "3.33.139.32",
-            ["research.microsoft.com"] = "20.112.250.133",
-            ["www.facebook.com"] = "157.240.12.35",
-            ["www.whitehouse.gov"] = "192.0.66.51",
-            ["www.answers.com"] = "151.101.92.203",
-            ["www.uol.com.br"] = "108.158.122.45",
-            ["www.hotmail.com"] = "204.79.197.212",
-            ["www.cplusplus.com"] = "54.39.7.252",
-            ["www.nyt.com"] = "151.101.93.164",
-            ["www.apple.com"] = "95.101.145.8"
-            
+        Dictionary<string, List<string>> Montadoras = new Dictionary<string, List<string>> {
+            ["Fiat"] = new List<string>
+                {
+                "Fiorino", "Argo","Pulse","Cronos","Fastback","Strada","Mobi","Toro","Titano"
+                }
+            ,["Volkswagen"] = new List<string>
+                {
+                    "Taos", "Voyage","Polo","Tera","Amarok","Nivus","Golf","Jetta","Tiguan"
+                }
+            ,
+            ["Hyundai"] = new List<string>
+                {
+                    "Creta","HB20","HB20S","Kona","Tucson"
+                }
+            ,
+            ["GM"] = new List<string>
+                {
+                    "Onix", "Tracker","S10","Spin","Montana"
+                }
         };
-        Console.WriteLine("Digite a URL para descobrir o ip do site");
-        string url = Console.ReadLine();
-        Console.WriteLine(Tomaoip[url]);
+        Console.WriteLine("Digite o nome da montadora para descobrir quantidade e nomes de carro");
+        string marca = Console.ReadLine();
+        Console.WriteLine("Quantidade de modelos: " + Montadoras[marca].Count());
+        foreach (string a in Montadoras[marca]) {
+            Console.Write(a + " | ");
+        }
     }
 }
