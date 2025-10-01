@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;
+class Program
+{
+    public static void Main()
+    {
+        Random r = new Random();
+        Stack<int> a = new Stack<int>();
+        for (int z = 0; z < 5; z++) { a.Push(r.Next(0, 100)); }
+        Stack<int> copia = Copiastack(a);
+        foreach (int elemainto in copia){
+            Console.WriteLine(elemainto);
+        }
+
+
+
+
+    }
+    public static Stack<T> Copiastack<T>(Stack<T> origem)
+    {
+        Stack<T> acopia = new Stack<T>();
+        foreach (T elemento in origem)
+        {
+            acopia.Push(elemento);
+        }
+        return acopia;
+    }
+    
+}

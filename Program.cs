@@ -5,33 +5,25 @@ class Program
     public static void Main()
     {
         Random r = new Random();
-        List<int> a = new List<int>();
-        List<int> b = new List<int>();
-        for (int z = 0; z < 5; z++) { a.Add(r.Next(0, 100)); }
-        for (int z = 0; z < 5; z++) { b.Add(r.Next(0, 100)); }
-        b.Add(5);b.Add(8);b.Add(8);b.Add(9);
-        a.Add(5);a.Add(8);a.Add(8);a.Add(9);
-        List<int> c = Intersecao(a, b);
-        Console.WriteLine(" ");
-        foreach (int elemanto in c)
-        {
+        Stack<int> a = new Stack<int>();
+        for (int z = 0; z < 5; z++) { a.Push(r.Next(0, 100)); }
+        Stack<int> copia = Copiastack(a);
+        foreach (int elemainto in copia){
+            Console.WriteLine(elemainto);
+        }
 
-            Console.Write(elemanto + " |");
-        }
-        Console.WriteLine(" ");
+
+
+
     }
-    public static List<T> Intersecao<T>(List<T> l1, List<T> l2)
+    public static Stack<T> Copiastack<T>(Stack<T> origem)
     {
-        List<T> l3 = new List<T>();
-        foreach (T elemento in l1)
+        Stack<T> acopia = new Stack<T>();
+        foreach (T elemento in origem)
         {
-            if (l2.Contains(elemento)) {
-                if (l3.Contains(elemento)) { }
-                else {
-                    l3.Add(elemento);
-                }
-            }
+            acopia.Push(elemento);
         }
-        return l3;
+        return acopia;
     }
+    
 }
