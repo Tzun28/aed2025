@@ -1,0 +1,33 @@
+using System;
+using System.Collections.Generic;
+class Program
+{
+    public static void Main()
+    {
+        Random r = new Random();
+        List<int> a = new List<int>();
+        List<int> b = new List<int>();
+        for (int z = 0; z < 5; z++) { a.Add(r.Next(0, 100)); }
+        for (int z = 0; z < 5; z++) { b.Add(r.Next(0, 100)); }
+        foreach (int x in a){Console.Write(x + "| ");}
+        Console.WriteLine(" ");
+        foreach (int x in b){Console.Write(x + "| ");}
+        Console.WriteLine(" ");
+        List<int> c = ConcatenaList1(a, b);
+        Console.WriteLine("Juntado:"); 
+        foreach (int x in c){Console.Write(x + "| ");}
+    }
+    public static List<T> ConcatenaList1<T>(List<T> l1, List<T> l2)
+    {
+        List<T> destino = new List<T>();
+        foreach (T elemento in l1){destino.Add(elemento);}
+        foreach (T elemento in l2){destino.Add(elemento);}
+        return destino;
+    }
+}
+/*A diferença é que o concatena list 1 é uma função, que tem por característica realizar algo,
+e como encerramento deve retornar um valor para o elemento que foi definido para receber o resultado da função
+_________________________________________________________________________
+Já o concatena 2 é um procedimento que independentemente de se alguma função vai receber algum valor,
+ ele simplemesmente executa o que foi escrito quando for chamado, e todo o conteúdo vai ser armazenado nas variavéis internas,
+  não ser que a váriavel que irá receber o conteúdo seja passada com referência, porém como no exemplo da lista, ele só vai passar se a própria lista existir no contexto*/

@@ -1,0 +1,28 @@
+using System;
+using System.Collections.Generic;
+class Program
+{
+    public static void Main()
+    {
+        Random r = new Random();
+        List<int> Tetetetestando = new List<int>();
+        Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100));
+        Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100));
+        Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100)); Tetetetestando.Add(r.Next(0, 100));
+        Console.WriteLine("Digite o início do apagar");
+        int a = int.Parse(Console.ReadLine());
+        Console.WriteLine("Digite o fim do apagar");
+        int b = int.Parse(Console.ReadLine());
+        Console.WriteLine(Tetetetestando.Count());
+        Apagalist(ref Tetetetestando, a ,b);
+        Console.WriteLine(Tetetetestando.Count());
+       
+    }
+    public static void Apagalist<T>(ref List<T> Recebe, int de, int ate)
+    {
+        for (int z = ate; z >= de; z--)
+        {
+            Recebe.RemoveAt(z-1);
+        }
+    }
+}
