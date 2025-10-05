@@ -14,7 +14,7 @@ class Program{
             ["www.yahoo.com"] = "200.152.162.137",
             ["www.microsoft.com"] = "23.212.153.219",
             ["www.x.com"] = "162.159.140.229",
-            ["www.brasil.gov.br"] = "[170.246.255.242",
+            ["www.brasil.gov.br"] = "170.246.255.242",
             ["www.wikipedia.com"] = "195.200.68.226",
             ["www.amazom.com"] = "3.33.139.32",
             ["research.microsoft.com"] = "20.112.250.133",

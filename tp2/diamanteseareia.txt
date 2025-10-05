@@ -1,0 +1,28 @@
+using System;
+class Program
+{
+    public static void Main()
+    {
+        int rep = int.Parse(Console.ReadLine());
+        char abre = '<', fecha = '>';
+        
+        for (int z = 0; z < rep; z++)
+        {
+            int a = 0, diamantes = 0;
+            string mineracao = Console.ReadLine();
+            foreach (char cadaum in mineracao)
+            {
+                if (cadaum == abre) a += 1;
+                if (cadaum == fecha)
+                {
+                    if (a > 0)
+                    {
+                        diamantes++;
+                        a--;
+                    }
+                }
+            }
+            Console.WriteLine(diamantes);
+        }
+    }
+}

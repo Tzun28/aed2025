@@ -1,0 +1,39 @@
+using System;
+class Program
+{
+    public static void Main()
+    {
+        int rep = int.Parse(Console.ReadLine());
+        Faca( rep);
+    }
+
+    public static void Vetormarromeno(int valor,int calculando, string[] vetas, ref string[] eovetas)
+    {
+
+        if (valor >= 0)
+        {
+            eovetas[calculando] = vetas[valor];
+            Console.Write(eovetas[calculando] + " ");
+            calculando += 1;
+            valor -= 1;
+            Vetormarromeno(valor, calculando, vetas,ref eovetas);
+        }
+        
+
+
+    }
+    public static void Faca( int execucoes)
+    {
+        if (execucoes > 0)
+        {
+
+            string[] vetor = Console.ReadLine().Split(" ");
+            int contagem = vetor.Length, contando = 0;
+            string[] vetordois = new string[contagem];
+            Vetormarromeno((contagem - 1), contando, vetor, ref vetordois);
+            Console.WriteLine("");
+            Faca(execucoes - 1);
+            
+        }
+    }
+}

@@ -1,29 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 class Program
 {
     public static void Main()
     {
-        Random r = new Random();
-        Stack<int> a = new Stack<int>();
-        for (int z = 0; z < 5; z++) { a.Push(r.Next(0, 100)); }
-        Stack<int> copia = Copiastack(a);
-        foreach (int elemainto in copia){
-            Console.WriteLine(elemainto);
-        }
-
-
-
-
-    }
-    public static Stack<T> Copiastack<T>(Stack<T> origem)
-    {
-        Stack<T> acopia = new Stack<T>();
-        foreach (T elemento in origem)
+        int algo = 1;
+        while (algo > 0)
         {
-            acopia.Push(elemento);
+            algo = int.Parse(Console.ReadLine());
+            int faz = algo / 2;
+            bool q = false;
+            bool s = false;
+            List<int> lista = new List<int>();
+            for (int a = 0; a < faz; a++)
+            {
+                string[] resp = Console.ReadLine().Split(" ");
+                lista.Add(int.Parse(resp[2]));
+            }
+            for (int a = 0; a < faz; a++)
+            {
+                string[] resp = Console.ReadLine().Split(" ");
+                if (int.Parse(resp[2]) == lista[a] && q == false){ q = false; }
+                else{ q = true; }
+
+            }
         }
-        return acopia;
     }
-    
 }
