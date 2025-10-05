@@ -1,29 +1,34 @@
 ﻿using System;
-using System.Runtime.ConstrainedExecution;
+using System.Collections.Generic;
 class Program
 {
     public static void Main()
     {
-        int algo = 1;
+        int algo;
+        algo = int.Parse(Console.ReadLine());
         while (algo > 0)
         {
-            algo = int.Parse(Console.ReadLine());
             int faz = algo / 2;
-            bool q = false;
-            bool s = false;
+            bool q = true;
+            bool s = true;
             List<int> lista = new List<int>();
             for (int a = 0; a < faz; a++)
             {
                 string[] resp = Console.ReadLine().Split(" ");
-                lista.Add(int.Parse(resp[2]));
+                lista.Add(int.Parse(resp[1]));
             }
-            for (int a = 0; a < faz; a++)
+            for (int b = 0; b < faz; b++)
             {
                 string[] resp = Console.ReadLine().Split(" ");
-                if (int.Parse(resp[2]) == lista[a] && q == false){ q = false; }
-                else{ q = true; }
-
+                if (int.Parse(resp[1]) == lista[b] && q == true) { q = true; }
+                else { q = false; }
+                if (int.Parse(resp[1]) == lista[(lista.Count - 1) - b] && s == true) { s = true; }
+                else { s = false; }
             }
+            if (q == true) { Console.WriteLine("queue"); }
+            else if (s == true) { Console.WriteLine("stack"); }
+            else { Console.WriteLine("list"); }
+            algo = int.Parse(Console.ReadLine());
         }
     }
 }
