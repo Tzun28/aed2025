@@ -1,0 +1,25 @@
+using System;
+class Program{
+    public static void Main()
+    {
+        int rodadas = int.Parse(Console.ReadLine());
+        for (int a = 0; a < rodadas; a++)
+        {
+            string[] saida = Console.ReadLine().Split(" ");
+            int quem = int.Parse(saida[0]);
+            int dalice = int.Parse(saida[1]);
+            int dbob = int.Parse(saida[2]);
+            int final = dbob + dalice;
+            if (quem == 0)
+            {
+                if (final % 2 == 0) { Console.WriteLine("0"); }
+                else { Console.WriteLine("1"); }
+            }
+            else
+            {
+                if (final % 2 == 0) { Console.WriteLine("1"); }
+                else { Console.WriteLine("0"); }
+            }
+        }
+    }
+}

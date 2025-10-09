@@ -1,0 +1,23 @@
+using System;
+class Program{
+    public static void Main()
+    {
+        int repeticoes = int.Parse(Console.ReadLine());
+        int saldotimeum;
+        int saldotimedois;
+        for (int a = 0; a < repeticoes; a++)
+        {
+            string[] partida1 = Console.ReadLine().ToUpper().Split("X");
+            string[] partida2 = Console.ReadLine().ToUpper().Split("X");
+            int t1manda = int.Parse(partida1[0]);int t2manda = int.Parse(partida2[0]);
+            int t1visita = int.Parse(partida2[1]);int t2visita = int.Parse(partida1[1]);
+            saldotimeum = t1manda + t1visita;
+            saldotimedois = t2visita + t2manda;
+            if (saldotimeum > saldotimedois) { Console.WriteLine("Time 1"); }
+            else if (saldotimedois > saldotimeum) { Console.WriteLine("Time 2"); }
+            else if (t1visita > t2visita){ Console.WriteLine("Time 1"); }
+            else if (t2visita > t1visita){ Console.WriteLine("Time 2"); }
+            else { Console.WriteLine("Penaltis"); }
+        }
+    }
+}
