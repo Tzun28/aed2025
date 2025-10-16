@@ -1,34 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 class Program
 {
     public static void Main()
     {
-        int algo;
-        algo = int.Parse(Console.ReadLine());
-        while (algo > 0)
+        int qtdpersonagens = int.Parse(Console.ReadLine());
+        for (int z = 0; z < qtdpersonagens; z++)
         {
-            int faz = algo / 2;
-            bool q = true;
-            bool s = true;
-            List<int> lista = new List<int>();
-            for (int a = 0; a < faz; a++)
+            string taldopersonagem = Console.ReadLine();
+            List<string> personagins = new List<string>();
+            foreach (string caracteristica in taldopersonagem.Split(";"))
             {
-                string[] resp = Console.ReadLine().Split(" ");
-                lista.Add(int.Parse(resp[1]));
+                personagins.Add(caracteristica);
             }
-            for (int b = 0; b < faz; b++)
+
+
+            Personagem Dart = new Personagem()
             {
-                string[] resp = Console.ReadLine().Split(" ");
-                if (int.Parse(resp[1]) == lista[b] && q == true) { q = true; }
-                else { q = false; }
-                if (int.Parse(resp[1]) == lista[(lista.Count - 1) - b] && s == true) { s = true; }
-                else { s = false; }
-            }
-            if (q == true) { Console.WriteLine("queue"); }
-            else if (s == true) { Console.WriteLine("stack"); }
-            else { Console.WriteLine("list"); }
-            algo = int.Parse(Console.ReadLine());
+
+            };
         }
     }
+}
+class Personagem {
+    private string nome;
+    private int altura;
+    private double peso;
+    private string corDoCabelo;
+    private string corDaPele;
+    private string corDosOlhos;
+    private string anoNascimento;
+    private string genero;
+    private string homeworld;
 }
