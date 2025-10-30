@@ -21,19 +21,16 @@ class Program
                 string anoNascimento = talpersonagem.Split(";")[6];
                 string genero = talpersonagem.Split(";")[7];
                 string homeworld = talpersonagem.Split(";")[8];
-            Personagem tal = new Personagem
-            {
-                Nome = nome,
-                altura = altura,
-                peso = peso,
-                corDoCabelo = corDoCabelo,
-                corDaPele = corDaPele,
-                corDosOlhos = corDosOlhos,
-                anoNascimento = anoNascimento,
-                genero = genero,
-                homeworld = homeworld,
-
-            };
+            Personagem tal = new Personagem(nome, altura, corDoCabelo, corDaPele, corDosOlhos, anoNascimento, genero, homeworld)
+            altura = Altura;
+        peso = Peso;
+        corDoCabelo = CorDoCabelo;
+        corDaPele = CorDaPele;
+        corDosOlhos = CorDosOlhos;
+        anoNascimento = AnoNascimento;
+        genero = Genero;
+        homeworld = Homeworld;
+        
         }
         
 
