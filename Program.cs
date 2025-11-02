@@ -1,67 +1,131 @@
-﻿using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
+﻿using System;
+using System.Collections.Generic;
 class Program
 {   
     public static void Main()
     {
-    Dictionary<string, Personagem> Tal = new Dictionary<string, Personagem>();
-
-        
-        int qtdpersonagens = int.Parse(Console.ReadLine());
-            List<Personagem> personagins = new List<Personagem>();
-        for (int z = 0; z < qtdpersonagens; z++)
+        List<Personagem> StarWars = new List<Personagem>();/*Lista que guarda os personagens*/
+        Queue<Personagem> FilaPersonagens = new Queue<Personagem>();
+        Stack<Personagem> PilhaPersonagens = new Stack<Personagem>();
+        int qtdpersonagens = int.Parse(Console.ReadLine());/*Começa com x número de personagens a serem adicionados na lista*/
+        for (int p = 0; p < qtdpersonagens; p++)/*Adiciona na quantidade de personagens até chegar no limite que foi pedido*/
         {
             string talpersonagem = Console.ReadLine();
-                string nome = talpersonagem.Split(";")[0];
-                int altura = int.Parse(talpersonagem.Split(";")[1]);
-                double peso = double.Parse(talpersonagem.Split(";")[2]);
-                string corDoCabelo = talpersonagem.Split(";")[3];
-                string corDaPele = talpersonagem.Split(";")[4];
-                string corDosOlhos = talpersonagem.Split(";")[5];
-                string anoNascimento = talpersonagem.Split(";")[6];
-                string genero = talpersonagem.Split(";")[7];
-                string homeworld = talpersonagem.Split(";")[8];
-            Personagem tal = new Personagem(nome, altura, corDoCabelo, corDaPele, corDosOlhos, anoNascimento, genero, homeworld)
-            altura = Altura;
-        peso = Peso;
-        corDoCabelo = CorDoCabelo;
-        corDaPele = CorDaPele;
-        corDosOlhos = CorDosOlhos;
-        anoNascimento = AnoNascimento;
-        genero = Genero;
-        homeworld = Homeworld;
-        
+            string nomeandopersonagem = talpersonagem.Split(";")[0];
+            int informandoaltura = int.Parse(talpersonagem.Split(";")[1]);
+            double informandopeso = double.Parse(talpersonagem.Split(";")[2]);
+            string informandoCorDoCabelo = talpersonagem.Split(";")[3];
+            string informandoCorDaPele = talpersonagem.Split(";")[4];
+            string informandoCorDosOlhos = talpersonagem.Split(";")[5];
+            string informandoAnoNascimento = talpersonagem.Split(";")[6];
+            string informandoGenero = talpersonagem.Split(";")[7];
+            string informandoHomeworld = talpersonagem.Split(";")[8];
+            Personagem Atual = new Personagem(nomeandopersonagem, informandoaltura, informandopeso, informandoCorDoCabelo, informandoCorDaPele, informandoCorDosOlhos,
+            informandoAnoNascimento, informandoGenero, informandoHomeworld);/*Depois de juntar dados, cria o personagem*/
+        StarWars.Add(Atual);/*Adiciona o personagem na lista*/
         }
-        
+        foreach (Personagem x in StarWars)
+        {
+            Console.WriteLine(x);
+        }
+        int qtdcomandos = int.Parse(Console.ReadLine());
+        for (int realicomandos = 0; realicomandos < qtdcomandos; realicomandos++)
+        {
+            string taiscomandos = Console.ReadLine();
+            string ocomando = taiscomandos.Split(";")[0].ToUpper();
+            string fazcomando = taiscomandos.Split(";")[1].ToUpper();
+            if (ocomando == "PESQBIN")
+            {
+                int pesquisabinaria = List<Personagem>.BinarySearch(StarWars.PegaNome(), fazcomando);
+                else if (ocomando == "PUSH")
+                {
+
+                }
+                else if (ocomando == "POP")
+                {
+
+                }
+                else if (ocomando == "ENQUEUE")
+                {
+
+                }
+                else if (ocomando == "DEQUEUE")
+                {
+
+                }
+            }
+        }
+    
 
     }
+    
 }
 
-class Personagem {
-    private string nome{ get; set; }
-    private int altura{ get; set; }
-    private double peso{ get; set; }
-    private string corDoCabelo{ get; set; }
-    private string corDaPele{ get; set; }
-    private string corDosOlhos{ get; set; }
-    private string anoNascimento{ get; set; }
-    private string genero{ get; set; }
-    private string homeworld{ get; set; }
 
-    public Personagem(string Nome, int Altura, double Peso, string CorDoCabelo, string CorDaPele,
-        string CorDosOlhos, string AnoNascimento, string Genero, string Homeworld)
+class Personagem : IComparable<Personagem> {
+    private string nome;
+    private int altura;
+    private double peso;
+    private string corDoCabelo;
+    private string corDaPele;
+    private string corDosOlhos;
+    private string anoNascimento;
+    private string genero;
+    private string homeworld;
+
+    public Personagem(string GuardaNome, int GuardaAltura, double GuardaPeso, string GuardaCorDoCabelo, string GuardaCorDaPele,
+        string GuardaCorDosOlhos, string GuardaAnoNascimento, string GuardaGenero, string GuardaHomeworld)
     {
-        nome = Nome;
-        altura = Altura;
-        peso = Peso;
-        corDoCabelo = CorDoCabelo;
-        corDaPele = CorDaPele;
-        corDosOlhos = CorDosOlhos;
-        anoNascimento = AnoNascimento;
-        genero = Genero;
-        homeworld = Homeworld;
-        
+        nome = GuardaNome;
+        altura = GuardaAltura;
+        peso = GuardaPeso;
+        corDoCabelo = GuardaCorDoCabelo;
+        corDaPele = GuardaCorDaPele;
+        corDosOlhos = GuardaCorDosOlhos;
+        anoNascimento = GuardaAnoNascimento;
+        genero = GuardaGenero;
+        homeworld = GuardaHomeworld;
     }
-        
-    
+    public string PegaNome()
+    {
+        return this.nome;
+    }
+    public int PegaAltura()
+    {
+        return this.altura;
+    }
+    public double PegaPeso()
+    {
+        return this.peso;
+    }
+    public string PegaCorCabelo()
+    {
+        return this.corDoCabelo;
+    }
+    public string PegaCorPele()
+    {
+        return this.corDaPele;
+    }
+    public string PegaCorOlhos()
+    {
+        return this.corDosOlhos;
+    }
+    public string PegaNascimento()
+    {
+        return this.anoNascimento;
+    }
+    public string PegaGenero()
+    {
+        return this.genero;
+    }
+    public string PegaLugarDeOrigem()
+    {
+        return this.homeworld;
+    }
+
+    public int CompareTo(Personagem tal)
+    {
+        return this.nome.CompareTo(tal.PegaNome());
+    }
+
 }
