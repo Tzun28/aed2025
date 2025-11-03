@@ -5,15 +5,18 @@ class Program
     public static void Main()
     {
         List<Personagem> StarWars = new List<Personagem>();/*Lista que guarda os personagens*/
-        Queue<Personagem> FilaPersonagens = new Queue<Personagem>();
-        Stack<Personagem> PilhaPersonagens = new Stack<Personagem>();
+        Queue<Personagem> FilaPersonagens = new Queue<Personagem>();/*Fila que guarda os personagens*/
+        Stack<Personagem> PilhaPersonagens = new Stack<Personagem>();/*Pilha que guarda os personagens*/
         int qtdpersonagens = int.Parse(Console.ReadLine());/*Começa com x número de personagens a serem adicionados na lista*/
         for (int p = 0; p < qtdpersonagens; p++)/*Adiciona na quantidade de personagens até chegar no limite que foi pedido*/
         {
-            string talpersonagem = Console.ReadLine();
-            string nomeandopersonagem = talpersonagem.Split(";")[0];
-            int informandoaltura = int.Parse(talpersonagem.Split(";")[1]);
-            double informandopeso = double.Parse(talpersonagem.Split(";")[2]);
+            string talpersonagem = Console.ReadLine();/*Recebe personagem via linha*/
+            string nomeandopersonagem = talpersonagem.Split(";")[0];/*Váriaveis de característica do personagem*/
+            int informandoaltura; double informandopeso;
+            if (talpersonagem.Split(";")[1].ToUpper() == "UNKNOWN") {informandoaltura = 0; }/*Evitar o problema que deu com int e double recebendo unknown na parte de altura e peso*/
+            else { informandoaltura = int.Parse(talpersonagem.Split(";")[1]); }
+            if (talpersonagem.Split(";")[2].ToUpper() == "UNKNOWN") { informandopeso = 0; }/*Evitar o problema que deu com int e double recebendo unknown na parte de altura e peso*/
+            else { informandopeso = double.Parse(talpersonagem.Split(";")[2]); }
             string informandoCorDoCabelo = talpersonagem.Split(";")[3];
             string informandoCorDaPele = talpersonagem.Split(";")[4];
             string informandoCorDosOlhos = talpersonagem.Split(";")[5];
@@ -24,36 +27,67 @@ class Program
             informandoAnoNascimento, informandoGenero, informandoHomeworld);/*Depois de juntar dados, cria o personagem*/
         StarWars.Add(Atual);/*Adiciona o personagem na lista*/
         }
-        foreach (Personagem x in StarWars)
-        {
-            Console.WriteLine(x);
-        }
-        int qtdcomandos = int.Parse(Console.ReadLine());
+        int qtdcomandos = int.Parse(Console.ReadLine());/*Comandos*/
         for (int realicomandos = 0; realicomandos < qtdcomandos; realicomandos++)
         {
-            string taiscomandos = Console.ReadLine();
+            string taiscomandos = Console.ReadLine();/*Recebe comando e valor de operação do comando*/
             string ocomando = taiscomandos.Split(";")[0].ToUpper();
-            string fazcomando = taiscomandos.Split(";")[1].ToUpper();
-            if (ocomando == "PESQBIN")
+            string fazcomando = taiscomandos.Split(";")[1];
+            if (ocomando == "PESQBIN")/*Comando*/
             {
-                int pesquisabinaria = List<Personagem>.BinarySearch(StarWars.PegaNome(), fazcomando);
-                else if (ocomando == "PUSH")
+                Personagem basedepesquisabinaria = new Personagem(fazcomando, 0, 0, "", "", "", "", "", "");/*Personagem base para fazer a pesquisa binária*/
+                int pesquisabinaria = StarWars.BinarySearch(basedepesquisabinaria);
+                if (pesquisabinaria >= 0) { Console.WriteLine(fazcomando + " Ok"); }
+                else { Console.WriteLine(fazcomando + " Nada"); }
+            }
+            else if (ocomando == "PUSH")/*Comando*/
+            {
+                foreach (Personagem empilhando in StarWars)
                 {
-
-                }
-                else if (ocomando == "POP")
-                {
-
-                }
-                else if (ocomando == "ENQUEUE")
-                {
-
-                }
-                else if (ocomando == "DEQUEUE")
-                {
-
+                    if (empilhando.PegaLugarDeOrigem() == fazcomando)
+                    {
+                        PilhaPersonagens.Push(empilhando);
+                    }
                 }
             }
+            else if (ocomando == "POP")/*Comando*/
+            {
+                if (fazcomando.ToUpper() == "ALL")
+                {
+                    int personagensxquantidade = PilhaPersonagens.Count;
+                    for (int tantos = 0; tantos < personagensxquantidade; tantos++){ Console.WriteLine(PilhaPersonagens.Pop().PegaNome()); }
+                }
+                else {
+                    int num = int.Parse(taiscomandos.Split(";")[1]); 
+                    for (int aham = 0; aham < num; aham++) { Console.WriteLine(PilhaPersonagens.Pop().PegaNome()); }
+                }
+                
+            }
+            else if (ocomando == "ENQUEUE")/*Comando*/
+            {
+
+                foreach (Personagem enfileirando in StarWars)
+                {
+                    if (enfileirando.PegaLugarDeOrigem() == fazcomando)
+                    {
+                        FilaPersonagens.Enqueue(enfileirando);
+                    }
+                }
+            }
+            else if (ocomando == "DEQUEUE")/*Comando*/
+            {   
+                if (fazcomando.ToUpper() == "ALL")
+                {
+                    int personagensxquantidade = FilaPersonagens.Count;
+                    for (int tantos = 0; tantos < personagensxquantidade; tantos++){ Console.WriteLine(FilaPersonagens.Dequeue().PegaNome()); }
+                }
+                else {
+                    int num = int.Parse(taiscomandos.Split(";")[1]);
+                    for (int aham = 0; aham < num; aham++) { Console.WriteLine(FilaPersonagens.Dequeue().PegaNome()); }
+                }
+
+            }
+            
         }
     
 
@@ -125,7 +159,7 @@ class Personagem : IComparable<Personagem> {
 
     public int CompareTo(Personagem tal)
     {
-        return this.nome.CompareTo(tal.PegaNome());
+        return this.nome.CompareTo(tal.PegaNome());/*Filtra nome para usar na pesquisa binária*/
     }
 
 }
