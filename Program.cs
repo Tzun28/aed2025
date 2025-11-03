@@ -10,11 +10,16 @@ namespace AED{
         {
             Item = default(T);
             Prox = null;
-        }   
+        }
         public CCelula(T valordoItem)
         {
             Item = valordoItem;
             Prox = null;
+        }
+        public CCelula(T valordoItem, CCelula<T> proxCelula)
+        {
+            Item = valordoItem;
+            Prox = proxCelula;
         }
     }
     #endregion
