@@ -1,236 +1,165 @@
-Star Wars-Episódio IV
-
-
-É um período de guerra civil.
-Partindo de uma base secreta,
-naves rebeldes atacam e
-conquistam sua primeira
-vitória contra o perverso
-Império Galáctico.
-
-
-Durante a batalha, espiões
-rebeldes conseguem roubar
-os planos secretos da arma
-decisiva do Império, a
-ESTRELA DA MORTE, uma
-estação espacial blindada
-com poder suficiente para
-destruir um planeta inteiro.
-
-
-Perseguida pelos sinistros
-agentes do Império, a princesa
-Leia, apressa-se em voltar
-para casa a bordo de sua
-nave estelar, protegendo
-os planos roubados que
-podem salvar seu povo e
-restaurar a liberdade na
-galáxia....
-
-
-Conhecem essa estória ? não ??
-(todo nerd precisa conhecer...)
-
-
-Agora chegou a hora de encarar o TP3 de AED !!!
-Nessa aventura você precisará de muita força e coragem
-Sua primeira tarefa será ajudar a princesa Leia a enviar
-para Obi-Wan Kenobi informações sobre os personagens
-deste universo
-Obi-Wan precisará de um programador (você) para
-carregar esses dados e fornecer informações importantes.
-Para isso você deverá criar uma classe Personagem
-com os seguintes atributos (todos privados):
-nome (String),
-altura (int),
-peso (double),
-corDoCabelo (String),
-corDaPele (String),
-corDosOlhos (String),
-anoNascimento (String),
-genero (String),
-homeworld (String)
-Deverá criar também uma lista de Personagens
-e armazenar cada um para responder
-às consultas da base rebelde.
-.
-.
-.
-
-Mas temos um problema:
-Lord Dart Vader baniu os vetores classes simples do universo
-e você não poderá mais utiliza-los.
-As classes List<T>, Queue<T> e Stack<T> ainda funcionam
-então você deverá utilizá-las para guardar os Personagens
-
-
-
-
-
-Entrada
-
-Ler um valor P de personagens. A seguir virão P linhas contendo cada os dados que e na ordem dos atributos da classe, separados por ponto-e-vírgula (;)
-É totalmente garantido que os nomes estarão em ordem alfabética. Essa informação será importante para a sua missão !
-Depois virá uma linha com um valor C de comandos da base rebelde, seguido de C linhas com o seguinte formato:
-
-
-<cmd>;<parâmetro>
-
-
-Onde:
-<cmd> pode ser um dos seguintes comandos:
-
-PesqBin, Push, Pop, Enqueue ou Dequeue
-
-(me disseram que você é um ótimo programador(a) e já sabe o que esses comandos devem fazer)
-
-Já o <parâmetro> dos comandos varia um pouco:
-
-Para o PesqBin o <parâmetro> será sempre
-um nome de personagem, que você deverá procurar usando o algoritmo PesqBin e exibir na saída (veja no exemplo da saida como deverá ficar);
-
-
-
-Para o comando Push o <parâmetro> será um nome de um dos homeworlds existentes. Neste caso você deverá empilhar todos os objetos dos personagens que tiverem o homeworld igual a este planeta.
-
-
-Por exemplo:
-Push;Tatooine
-
-Vai empilhar todos os personagens deste planeta
-
-Para o comando Pop o <parâmetro> será um número ou a palavra “all”. Neste caso você deverá desempilhar quantidade de objetos indicados no <parâmetro> (e mostrar na saída, viu ?).
-
-Por exemplo:
-
-Pop;5
-
-Vai desempilhar 5 personagens
-
-Pop;all
-
-Vai desempilhar todos os personagens
-
-.
-.
-.
-
-Finalmente, para os comandos Enqueue e Dequeue, o <parâmetro> e o seu tratamento será semelhante aos comandos Push e Pop (respectivamente).
-
-A diferença é que neste caso eles serão enviados para uma Fila em lugar de uma Pilha.
-Mas você já é fera nisso, né ?
-
-
-
-
-Saída
-
-Para alguns dos comandos de entrada as saídas deverão ser:
-
-Para o PesqBin: deve ser exibido o nome pesquisado seguido, na mesma linha, de “Ok” ou “Nada” (veja no exemplo)
-
-
-Para o Pop: deve ser exibido apenas os nomes desempilhados de acordo com a quantidade indicada pelo seu parâmetro
-
-
-Para o Dequeue: deve ser exibido apenas os nomes desenfileirados de acordo com a quantidade indicada pelo seu parâmetro
-
-
-Os comandos Push e Enqueue não produzem nenhuma saída.
-
-
-
-
-ATENÇÃO: neste desafio não apenas criar o arquivo de saída
-e tirar 100% no Verde. O seu código precisa ter a classe e os
-métodos conforme exigido pelo comando rebelde.
-Mestre Yoda (o professor) irá inspecionar o seu código.
-E como o mestre Yoda diz:
-
-Os seus próprios desafios resolver você deve.
-Tarde para começar amanhã pode ser.
-No simples, pense, não complique.
-Que com você a Força esteja.
-.
-. ENTRADAS
-.
-
-24
-
-Ackbar;180;83;none;brown mottle;orange;41BBY;male;Mon Cala
-
-Adi Gallia;184;50;none;dark;blue;unknown;female;Coruscant
-
-Anakin Skywalker;188;84;blond;fair;blue;41.9BBY;male;Tatooine
-
-Arvel Crynyd;unknown;unknown;brown;fair;brown;unknown;male;unknown
-
-Ayla Secura;178;55;none;blue;hazel;48BBY;female;Ryloth
-
-BB8;unknown;unknown;none;none;black;unknown;none;unknown
-
-Bail Prestor Organa;191;unknown;black;tan;brown;67BBY;male;Alderaan
-
-Barriss Offee;166;50;black;yellow;blue;40BBY;female;Mirial
-
-Ben Quadinaros;163;65;none;grey, green, yellow;orange;unknown;male;Tund
-
-Beru Whitesun lars;165;75;brown;light;blue;47BBY;female;Tatooine
-
-Bib Fortuna;180;unknown;none;pale;pink;unknown;male;Ryloth
-
-Biggs Darklighter;183;84;black;light;brown;24BBY;male;Tatooine
-
-Boba Fett;183;78.2;black;fair;brown;31.5BBY;male;Kamino
-
-Bossk;190;113;none;green;red;53BBY;male;Trandosha
-
-C-3PO;167;75;n/a;gold;yellow;112BBY;n/a;Tatooine
-
-Chewbacca;228;112;brown;unknown;blue;200BBY;male;Kashyyyk
-
-Cliegg Lars;183;unknown;brown;fair;blue;82BBY;male;Tatooine
-
-Corde;157;unknown;brown;light;brown;unknown;female;Naboo
-
-Darth Maul;175;80;none;red;yellow;54BBY;male;Dathomir
-
-Darth Vader;202;136;none;white;yellow;41.9BBY;male;Tatooine
-
-Dexter Jettster;198;102;none;brown;yellow;unknown;male;Ojom
-
-Dooku;193;80;white;fair;brown;102BBY;male;Serenno
-
-Yoda;66;17;white;green;brown;896BBY;male;unknown
-
-Zam Wesell;168;55;blonde;fair, green, yellow;yellow;unknown;female;Zolan
-
-7
-
-PesqBin;Yoda
-
-PesqBin;Vader
-
-Push;Tatooine
-
-Enqueue;Ryloth
-
-Pop;3
-
-Dequeue;1
-
-Pop;all
-
-SAIDAS
-
-Yoda Ok
-Vader Nada
-Darth Vader
-Cliegg Lars
-C-3PO
-Ayla Secura
-Biggs Darklighter
-Beru Whitesun lars
-Anakin Skywalker
+using System;
+using System.Collections.Generic;
+class Program
+{   
+    public static void Main()
+    {
+        List<Personagem> StarWars = new List<Personagem>();/*Lista que guarda os personagens*/
+        Queue<Personagem> FilaPersonagens = new Queue<Personagem>();/*Fila que guarda os personagens*/
+        Stack<Personagem> PilhaPersonagens = new Stack<Personagem>();/*Pilha que guarda os personagens*/
+        int qtdpersonagens = int.Parse(Console.ReadLine());/*Começa com x número de personagens a serem adicionados na lista*/
+        for (int p = 0; p < qtdpersonagens; p++)/*Adiciona na quantidade de personagens até chegar no limite que foi pedido*/
+        {
+            string talpersonagem = Console.ReadLine();/*Recebe personagem via linha*/
+            string nomeandopersonagem = talpersonagem.Split(";")[0];/*Váriaveis de característica do personagem*/
+            int informandoaltura; double informandopeso;
+            if (talpersonagem.Split(";")[1].ToUpper() == "UNKNOWN") {informandoaltura = 0; }/*Evitar o problema que deu com int e double recebendo unknown na parte de altura e peso*/
+            else { informandoaltura = int.Parse(talpersonagem.Split(";")[1]); }
+            if (talpersonagem.Split(";")[2].ToUpper() == "UNKNOWN") { informandopeso = 0; }/*Evitar o problema que deu com int e double recebendo unknown na parte de altura e peso*/
+            else { informandopeso = double.Parse(talpersonagem.Split(";")[2]); }
+            string informandoCorDoCabelo = talpersonagem.Split(";")[3];
+            string informandoCorDaPele = talpersonagem.Split(";")[4];
+            string informandoCorDosOlhos = talpersonagem.Split(";")[5];
+            string informandoAnoNascimento = talpersonagem.Split(";")[6];
+            string informandoGenero = talpersonagem.Split(";")[7];
+            string informandoHomeworld = talpersonagem.Split(";")[8];
+            Personagem Atual = new Personagem(nomeandopersonagem, informandoaltura, informandopeso, informandoCorDoCabelo, informandoCorDaPele, informandoCorDosOlhos,
+            informandoAnoNascimento, informandoGenero, informandoHomeworld);/*Depois de juntar dados, cria o personagem*/
+        StarWars.Add(Atual);/*Adiciona o personagem na lista*/
+        }
+        int qtdcomandos = int.Parse(Console.ReadLine());/*Comandos*/
+        for (int realicomandos = 0; realicomandos < qtdcomandos; realicomandos++)
+        {
+            string taiscomandos = Console.ReadLine();/*Recebe comando e valor de operação do comando*/
+            string ocomando = taiscomandos.Split(";")[0].ToUpper();
+            string fazcomando = taiscomandos.Split(";")[1];
+            if (ocomando == "PESQBIN")/*Comando*/
+            {
+                Personagem basedepesquisabinaria = new Personagem(fazcomando, 0, 0, "", "", "", "", "", "");/*Personagem base para fazer a pesquisa binária*/
+                int pesquisabinaria = StarWars.BinarySearch(basedepesquisabinaria);
+                if (pesquisabinaria >= 0) { Console.WriteLine(fazcomando + " Ok"); }
+                else { Console.WriteLine(fazcomando + " Nada"); }
+            }
+            else if (ocomando == "PUSH")/*Comando*/
+            {
+                foreach (Personagem empilhando in StarWars)
+                {
+                    if (empilhando.PegaLugarDeOrigem() == fazcomando)
+                    {
+                        PilhaPersonagens.Push(empilhando);
+                    }
+                }
+            }
+            else if (ocomando == "POP")/*Comando*/
+            {
+                if (fazcomando.ToUpper() == "ALL")
+                {
+                    int personagensxquantidade = PilhaPersonagens.Count;
+                    for (int tantos = 0; tantos < personagensxquantidade; tantos++){ Console.WriteLine(PilhaPersonagens.Pop().PegaNome()); }
+                }
+                else {
+                    int num = int.Parse(taiscomandos.Split(";")[1]); 
+                    for (int aham = 0; aham < num; aham++) { Console.WriteLine(PilhaPersonagens.Pop().PegaNome()); }
+                }
+                
+            }
+            else if (ocomando == "ENQUEUE")/*Comando*/
+            {
+
+                foreach (Personagem enfileirando in StarWars)
+                {
+                    if (enfileirando.PegaLugarDeOrigem() == fazcomando)
+                    {
+                        FilaPersonagens.Enqueue(enfileirando);
+                    }
+                }
+            }
+            else if (ocomando == "DEQUEUE")/*Comando*/
+            {   
+                if (fazcomando.ToUpper() == "ALL")
+                {
+                    int personagensxquantidade = FilaPersonagens.Count;
+                    for (int tantos = 0; tantos < personagensxquantidade; tantos++){ Console.WriteLine(FilaPersonagens.Dequeue().PegaNome()); }
+                }
+                else {
+                    int num = int.Parse(taiscomandos.Split(";")[1]);
+                    for (int aham = 0; aham < num; aham++) { Console.WriteLine(FilaPersonagens.Dequeue().PegaNome()); }
+                }
+
+            }
+            
+        }
+    
+
+    }
+    
+}
+
+
+class Personagem : IComparable<Personagem> {
+    private string nome;
+    private int altura;
+    private double peso;
+    private string corDoCabelo;
+    private string corDaPele;
+    private string corDosOlhos;
+    private string anoNascimento;
+    private string genero;
+    private string homeworld;
+
+    public Personagem(string GuardaNome, int GuardaAltura, double GuardaPeso, string GuardaCorDoCabelo, string GuardaCorDaPele,
+        string GuardaCorDosOlhos, string GuardaAnoNascimento, string GuardaGenero, string GuardaHomeworld)
+    {
+        nome = GuardaNome;
+        altura = GuardaAltura;
+        peso = GuardaPeso;
+        corDoCabelo = GuardaCorDoCabelo;
+        corDaPele = GuardaCorDaPele;
+        corDosOlhos = GuardaCorDosOlhos;
+        anoNascimento = GuardaAnoNascimento;
+        genero = GuardaGenero;
+        homeworld = GuardaHomeworld;
+    }
+    public string PegaNome()
+    {
+        return this.nome;
+    }
+    public int PegaAltura()
+    {
+        return this.altura;
+    }
+    public double PegaPeso()
+    {
+        return this.peso;
+    }
+    public string PegaCorCabelo()
+    {
+        return this.corDoCabelo;
+    }
+    public string PegaCorPele()
+    {
+        return this.corDaPele;
+    }
+    public string PegaCorOlhos()
+    {
+        return this.corDosOlhos;
+    }
+    public string PegaNascimento()
+    {
+        return this.anoNascimento;
+    }
+    public string PegaGenero()
+    {
+        return this.genero;
+    }
+    public string PegaLugarDeOrigem()
+    {
+        return this.homeworld;
+    }
+
+    public int CompareTo(Personagem tal)
+    {
+        return this.nome.CompareTo(tal.PegaNome());/*Filtra nome para usar na pesquisa binária*/
+    }
+
+}
