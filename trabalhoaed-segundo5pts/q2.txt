@@ -1,0 +1,91 @@
+using System;
+using System.Collections.Generic;
+namespace AED{
+    #region Classe CCelula - Esse tal de region aparentemente é para ocultar essa parte do código mais fácil
+    public class CCelula<T>//Declaração de classe ccelula com dado genérico
+    {
+        public T Item;
+        public CCelula<T> Prox;
+        public CCelula()
+        {
+            Item = default(T);
+            Prox = null;
+        }
+        public CCelula(T valordoItem)
+        {
+            Item = valordoItem;
+            Prox = null;
+        }
+        public CCelula(T valordoItem, CCelula<T> proxCelula)
+        {
+            Item = valordoItem;
+            Prox = proxCelula;
+        }
+
+    }
+    #endregion
+    #region Tentando fazer uma Cclasse Lista
+    public class CLista<T>
+    {
+        private CCelula<T> Primeira;
+        private CCelula<T> Ultima;
+        public CLista()
+        {
+            Primeira = new CCelula<T>();
+            Ultima = Primeira;
+        }
+        public void Inserir(T valor)
+        {
+            Ultima.Prox = new CCelula<T>(valor);
+            Ultima = Ultima.Prox;
+
+        }
+        public void InserirDepoisDe(T valorainserir, T valoratual)
+        {
+            bool ach = false;
+            for (CCelula<T> x = Primeira.Prox; x != null && ach == false ; x = x.Prox)
+            {
+                if (x.Item.Equals(valoratual))
+                {
+                    CCelula<T> y = new CCelula<T>(valorainserir);
+                    y.Prox = x.Prox; 
+                    x.Prox = y;
+                    ach = true;
+                }
+            }
+
+        }
+    #endregion
+        public void ImprimeAll()
+        {
+            for (CCelula<T> hoi = Primeira; hoi.Prox != null; hoi = hoi.Prox)
+            {
+                Console.Write("{0} ", hoi.Prox.Item);
+            }
+        }
+        
+    }
+
+
+    class Program
+    {  
+        public static void Main()
+        {
+            CLista<int> Numbers = new CLista<int>();
+            
+            Numbers.Inserir(5);
+            Numbers.Inserir(8);
+            Numbers.Inserir(9);
+            Numbers.Inserir(1);
+            Numbers.Inserir(3);
+            Numbers.Inserir(4);
+            Numbers.ImprimeAll();
+            Console.WriteLine("");
+            Numbers.InserirDepoisDe(7, 9);/*Existe e insere*/
+            Numbers.InserirDepoisDe(7, 10);/*Não existe ignora*/
+            Numbers.ImprimeAll();
+
+        }
+        
+    }
+}

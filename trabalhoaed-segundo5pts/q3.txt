@@ -1,0 +1,83 @@
+using System;
+using System.Collections.Generic;
+namespace AED{
+    #region Classe CCelula - Esse tal de region aparentemente é para ocultar essa parte do código mais fácil
+    public class CCelula<T>//Declaração de classe ccelula com dado genérico
+    {
+        public T Item;
+        public CCelula<T> Prox;
+        public CCelula()
+        {
+            Item = default(T);
+            Prox = null;
+        }
+        public CCelula(T valordoItem)
+        {
+            Item = valordoItem;
+            Prox = null;
+        }
+        public CCelula(T valordoItem, CCelula<T> proxCelula)
+        {
+            Item = valordoItem;
+            Prox = proxCelula;
+        }
+
+    }
+    #endregion
+    #region Tentando fazer uma Cclasse Lista
+    public class CLista<T>
+    {
+        private CCelula<T> Primeira;
+        private CCelula<T> Ultima;
+        public CLista()
+        {
+            Primeira = new CCelula<T>();
+            Ultima = Primeira;
+        }
+        public void Inserir(T valor)
+        {
+            Ultima.Prox = new CCelula<T>(valor);
+            Ultima = Ultima.Prox;
+
+        }
+        public void InserirOrdenado(T valorainserir)
+        {
+            CCelula<T> x = Primeira;
+            while (x.Prox != null && Comparer<T>.Default.Compare(x.Prox.Item, valorainserir) < 0)
+            {
+                x = x.Prox;
+            }
+            CCelula<T> adccelula = new CCelula<T>(valorainserir);
+            adccelula.Prox = x.Prox;
+            x.Prox = adccelula;
+            if (x.Prox == Ultima) { Ultima = adccelula; }
+
+        }
+    #endregion
+        public void ImprimeAll()
+        {
+            for (CCelula<T> hoi = Primeira; hoi.Prox != null; hoi = hoi.Prox)
+            {
+                Console.Write("{0} ", hoi.Prox.Item);
+            }
+        }
+        
+    }
+
+
+    class Program
+    {  
+        public static void Main()
+        {
+            CLista<int> Numbers = new CLista<int>();
+            
+            Numbers.InserirOrdenado(5);
+            Numbers.InserirOrdenado(8);
+            Numbers.InserirOrdenado(9);
+            Numbers.InserirOrdenado(1);
+            Numbers.InserirOrdenado(3);
+            Numbers.InserirOrdenado(4);
+            Numbers.ImprimeAll();
+        }
+    }
+}
