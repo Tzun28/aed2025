@@ -1,31 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace AED{
+namespace AED
+{
     #region Classe CCelula - Esse tal de region aparentemente é para ocultar essa parte do código mais fácil
-    #region Tentando fazer uma Cclasse Lista
-    public class CLista<T>
-    {
-        private CCelula<T> Primeira;
-        private CCelula<T> Ultima;
-        public CLista()
-        {
-            Primeira = new CCelula<T>();
-            Ultima = Primeira;
-        }
-        public void InserirAntesDe( T valorainserir, T valoratual)
-        {
-            for (CCelula<T> x = Primeira.Prox; x != null; x = x.Prox)
-            {
-                if (x() == x(valoratual))
-                {
-                    
-                }
-            }
-            
-        }
-        
-    }
-    #endregion
     public class CCelula<T>//Declaração de classe ccelula com dado genérico
     {
         public T Item;
@@ -45,23 +22,70 @@ namespace AED{
             Item = valordoItem;
             Prox = proxCelula;
         }
-        
+
     }
     #endregion
+    #region Tentando fazer uma Cclasse Lista
+    public class CListaDup<T>
+    {
+        private CCelula<T> Primeira;
+        private CCelula<T> Ultima;
+        public CListaDup()
+        {
+            Primeira = new CCelula<T>();
+            Ultima = Primeira;
+        }
+        public void Inserir(T valor)
+        {
+            Ultima.Prox = new CCelula<T>(valor);
+            Ultima = Ultima.Prox;
+
+        }
+        #endregion
+        public void ImprimeAll()
+        {
+            for (CCelula<T> hoi = Primeira; hoi.Prox != null; hoi = hoi.Prox)
+            {
+                Console.Write("{0} ", hoi.Prox.Item);
+            }
+        }
+        public static CListaDup<T> ConcatenaLD(CListaDup<T> L1, CListaDup<T> L2)
+        {
+            CListaDup<T> aux = new CListaDup<T>();
+            for (CCelula<T> x = L1.Primeira; x.Prox != null; x = x.Prox)
+            {
+                aux.Inserir(x.Prox.Item);
+            }
+            for (CCelula<T> x = L2.Primeira; x.Prox != null; x = x.Prox)
+            {
+                aux.Inserir(x.Prox.Item);
+            }
+
+            return aux;   
+        }
+
+    }
+
+
     class Program
     {
         public static void Main()
         {
-            List<string> Raio = new List<string>() { "Raio", "Trovão", "Barulho" };
-            Console.WriteLine(Raio[0]);
-            Raio[0] = Raio[1];
-            Console.WriteLine(Raio[0]);
-
-            List<CCelula<string>> Clista = new List<CCelula<string>>();
-
-
-
+            CListaDup<int> A = new CListaDup<int>();
+            CListaDup<int> B = new CListaDup<int>();
+            A.Inserir(19);
+            A.Inserir(33);
+            A.Inserir(2);
+            A.Inserir(4);
+            B.Inserir(1);
+            B.Inserir(2);
+            B.Inserir(3);
+            B.Inserir(4);
+            B.Inserir(5);
+            CListaDup<int> AmaisB = new CListaDup<int>();
+            AmaisB = CListaDup<int>.ConcatenaLD(A, B);
+            AmaisB.ImprimeAll();
         }
-        
     }
 }
+
