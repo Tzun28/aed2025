@@ -25,34 +25,55 @@ namespace AED
 
     }
     #endregion
-    #region Tentando fazer uma Cclasse Lista
-    public class CListaDup<T>
+    #region CFila
+    public class CFila<T> : IEnumerable<T>
     {
-        private CCelula<T> Primeira;
-        private CCelula<T> Ultima;
-        public CListaDup()
+        private CCelula<T> Frente;
+        private CCelula<T> Tras;
+        private int Qtde = 0;
+        public CFila()
         {
-            Primeira = new CCelula<T>();
-            Ultima = Primeira;
+            Frente = new CCelula<T>();
+            Tras = Frente;
         }
-        public void Inserir(T valor)
+        public bool EstaVazia() => Frente == Tras;
+        public void Enfileira(T valorItem)
         {
-            Ultima.Prox = new CCelula<T>(valor);
-            Ultima = Ultima.Prox;
-
+            Tras.Prox = new CCelula<T>(valorItem);
+            Tras = Tras.Prox;
+            Qtde++;
         }
-        #endregion
-        public void ImprimeAll()
+        public T Desenfileira()
         {
-            for (CCelula<T> hoi = Primeira; hoi.Prox != null; hoi = hoi.Prox)
+            if (Frente != Tras)
             {
-                Console.Write("{0} ", hoi.Prox.Item);
+                Frente = Frente.Prox;
+                T item = Frente.Item;
+                Qtde--;
+                return item;
             }
+            return default(T);
         }
-        public static CListaDup<T> ConcatenaLD(CListaDup<T> L1, CListaDup<T> L2)
+        public T Peek() => Frente != Tras ? Frente.Prox.Item : default(T);
+        public bool Contem(T valorItem)
         {
-            CListaDup<T> aux = new CListaDup<T>();
-            for (CCelula<T> x = L1.Primeira; x.Prox != null; x = x.Prox)
+            for (CCelula<T> aux = Frente.Prox; aux != null; aux = aux.Prox)
+                if (EqualityComparer<T>.Default.Equals(aux.Item,
+                valorItem))
+                    return true;
+            return false;
+        }
+        public int Quantidade() => Qtde;
+        public IEnumerator<T> GetEnumerator()
+        {
+            for (var aux = Frente.Prox; aux != null; aux = aux.Prox)
+                yield return aux.Item;
+        }
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+    
+        public static CFila<T> ConcatenaFila(CFila<T> F1, CFila<T> F2){
+            CFila<T> aux = new CFila<T>();
+            for (CCelula<T> x = F1.Tras; x.Prox != null; x = x.Prox)
             {
                 aux.Inserir(x.Prox.Item);
             }
@@ -60,32 +81,15 @@ namespace AED
             {
                 aux.Inserir(x.Prox.Item);
             }
-
-            return aux;   
+            return aux;
         }
-
     }
-
-
+        #endregion
     class Program
     {
         public static void Main()
         {
-            CListaDup<int> A = new CListaDup<int>();
-            CListaDup<int> B = new CListaDup<int>();
-            A.Inserir(19);
-            A.Inserir(33);
-            A.Inserir(2);
-            A.Inserir(4);
-            B.Inserir(1);
-            B.Inserir(2);
-            B.Inserir(3);
-            B.Inserir(4);
-            B.Inserir(5);
-            CListaDup<int> AmaisB = new CListaDup<int>();
-            AmaisB = CListaDup<int>.ConcatenaLD(A, B);
-            AmaisB.ImprimeAll();
+            
         }
     }
 }
-
