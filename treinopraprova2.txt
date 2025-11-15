@@ -1,0 +1,84 @@
+/*
+Strada;18;Prata;160;Fiat;Brasil;False
+Civic;17;Preto;200;Honda;Japão;False
+Model 3;19;Branco;225;Tesla;EUA;True
+Gol;15;Vermelho;170;Volkswagen;Brasil;False
+Corolla;16;Azul;190;Toyota;Japão;False
+Mustang;20;Amarelo;250;Ford;EUA;False
+iX;21;Cinza;210;BMW;Alemanha;True
+Onix;15;Verde;165;Chevrolet;Brasil;False
+Leaf;16;Branco;150;Nissan;Japão;True
+iX;21;Cinza;210;BMW;Alemanha;True
+Onix;15;Verde;165;Chevrolet;Brasil;False
+Leaf;16;Branco;150;Nissan;Japão;True
+*/
+
+using System;
+using System.Collections.Generic;
+public class Program{
+    public static void Main(){
+        List<Vehicle> Carros = new List<Vehicle>();
+        Console.WriteLine("Catalogando carros");
+        Console.WriteLine("Digite quantos carros serão catalogados");
+        int qtdcarros = int.Parse(Console.ReadLine());
+        for (int repeticoes = 0; repeticoes < qtdcarros; repeticoes++){
+            string resposta = Console.ReadLine();
+            string nomeautomovel = resposta.Split(";")[0];
+            int qualarodocarro = int.Parse(resposta.Split(";")[1]);
+            string qualcordocarro = resposta.Split(";")[2];
+            int qualvelocidade = int.Parse(resposta.Split(";")[3]);
+            string qualmarca = resposta.Split(";")[4];
+            string ondefoifabricado = resposta.Split(";")[5];
+            bool carroeletrico = bool.Parse(resposta.Split(";")[6]);
+            
+            Vehicle Automovel = new Vehicle(nomeautomovel,qualarodocarro,qualcordocarro,qualvelocidade,qualmarca,ondefoifabricado,carroeletrico);
+            Carros.Add(Automovel);
+        }
+        foreach (Vehicle tal in Carros){
+                Console.WriteLine("O nome do carro cadastrado é {0} fabricado pela {1}.",tal.Peganomecarro(),tal.PegaMarca());
+                Console.WriteLine();
+            }
+    }
+    #region Classe veículos
+    class Vehicle{
+        private string nome;
+        private int roda;
+        private string cor;
+        private int velocidademax;
+        private string marca;
+        private string paisfabricacao;
+        private bool eletrico;
+        public Vehicle(string nomeado, int aroroda, string cordocarro, int kmh, string qualmarca, string fabrica, bool carroev){ 
+            nome = nomeado;
+            roda = aroroda;
+            cor = cordocarro;
+            velocidademax = kmh;
+            marca = qualmarca;
+            paisfabricacao = fabrica;
+            eletrico = carroev;
+        }
+        public string Peganomecarro(){
+            return this.nome;
+        }
+        public int PegaAroDoCarro(){
+            return this.roda;
+        }
+        public string PegaCor(){
+            return this.cor;
+        }
+        public int QualVelocidade(){
+            return this.velocidademax;
+        } 
+        public string PegaMarca(){
+            return this.marca;
+        }
+        public string OndeFabricado(){
+            return this.paisfabricacao;
+        }
+        public bool CarroEletrico(){
+            return this.eletrico;
+        }
+
+    }
+    #endregion
+}

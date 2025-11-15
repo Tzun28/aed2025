@@ -70,26 +70,49 @@ namespace AED
                 yield return aux.Item;
         }
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
-    
-        public static CFila<T> ConcatenaFila(CFila<T> F1, CFila<T> F2){
+
+        public static CFila<T> ConcatenaFila(CFila<T> F1, CFila<T> F2)
+        {
             CFila<T> aux = new CFila<T>();
-            for (CCelula<T> x = F1.Tras; x.Prox != null; x = x.Prox)
+            for (CCelula<T> x = F1.Frente.Prox; x != null; x = x.Prox)
             {
-                aux.Inserir(x.Prox.Item);
+                aux.Enfileira(x.Item);
             }
-            for (CCelula<T> x = L2.Primeira; x.Prox != null; x = x.Prox)
+            for (CCelula<T> x = F2.Frente.Prox; x != null; x = x.Prox)
             {
-                aux.Inserir(x.Prox.Item);
+                aux.Enfileira(x.Item);
             }
             return aux;
         }
+
+        public static void ImprimeFila(CFila<T> tal)
+        {
+            for (CCelula<T> a = tal.Frente.Prox; a != null; a = a.Prox)
+            {
+                Console.WriteLine(a.Item);
+            }
+        }
     }
         #endregion
+        /*------------------------------------------------------------*/
     class Program
     {
         public static void Main()
         {
+            CFila<int> A = new CFila<int>();
+            CFila<int> B = new CFila<int>();
+            A.Enfileira(19);
+            A.Enfileira(33);
+            A.Enfileira(2);
+            A.Enfileira(4);
+            B.Enfileira(1);
+            B.Enfileira(2);
+            B.Enfileira(3);
+            B.Enfileira(4);
+            B.Enfileira(5);
+            CFila<int> AmaisB = CFila<int>.ConcatenaFila(A, B);
             
+            CFila<int>.ImprimeFila(AmaisB);
         }
     }
 }
