@@ -1,0 +1,100 @@
+using System;
+
+namespace AED
+{
+    #region Classe CCelula
+    public class CCelula<T>
+    {
+        public T Item;
+        public CCelula<T> Prox;
+        public CCelula()
+        {
+            Item = default(T);
+            Prox = null;
+        }
+        public CCelula(T valordoItem)
+        {
+            Item = valordoItem;
+            Prox = null;
+        }
+        public CCelula(T valordoItem, CCelula<T> proxCelula)
+        {
+            Item = valordoItem;
+            Prox = proxCelula;
+        }
+    }
+    #endregion
+
+    public class RandomQueue<T>
+    {
+        private CCelula<T> Frente;
+        private CCelula<T> Tras;
+        private int Qtde = 0;
+        private Random fila = new Random(); 
+        public RandomQueue()
+        {
+            Frente = new CCelula<T>();
+            Tras = Frente;
+        }
+        public void Enqueue(T item)
+        {
+            Tras.Prox = new CCelula<T>(item);
+            Tras = Tras.Prox;
+            Qtde++;
+        }
+        public bool IsEmpty()
+        {
+            if (Qtde <= 0){return true;}
+            else{return false;}
+        }
+
+        public Object Dequeue()
+        {
+            if (IsEmpty()){return default(T);}
+            int posicaoDaCelulaSorteada = fila.Next(0, Qtde);
+            CCelula<T> anterior = Frente;
+            for (int i = 0; i < posicaoDaCelulaSorteada; i++)
+            {
+                anterior = anterior.Prox;
+            }
+            CCelula<T> aux = anterior.Prox;
+            anterior.Prox = aux.Prox;
+            if (aux == Tras)
+            {
+                Tras = anterior;
+            }
+
+            Qtde--;
+            return aux.Item;
+        }
+
+        public Object Sample()
+        {
+            if (IsEmpty()){return default(T);}
+            int posicaoDaCelulaSorteada = fila.Next(0, Qtde);
+            CCelula<T> aux = Frente.Prox;
+            for (int i = 0; i < posicaoDaCelulaSorteada; i++)
+            {
+                aux = aux.Prox;
+            }
+            return aux.Item;
+        }
+    }
+
+    /*---------------------------------------------------------*/
+
+    class Program
+    {
+        public static void Main()
+        {
+            RandomQueue<int> filaaleatoria = new RandomQueue<int>();
+            filaaleatoria.Enqueue(1);
+            filaaleatoria.Enqueue(2);
+            filaaleatoria.Enqueue(3);
+            filaaleatoria.Enqueue(4);
+            Console.WriteLine(filaaleatoria.Sample());
+            Console.WriteLine(filaaleatoria.Dequeue());
+            Console.WriteLine(filaaleatoria.Dequeue());
+        }
+    }
+}

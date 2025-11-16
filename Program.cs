@@ -1,95 +1,154 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
+
 namespace AED
 {
-    #region Classe CCelula - Esse tal de region aparentemente é para ocultar essa parte do código mais fácil
-    public class CCelula<T>//Declaração de classe ccelula com dado genérico
+    public class CCelulaDup<T>
     {
         public T Item;
-        public CCelula<T> Prox;
-        public CCelula()
+        public CCelulaDup<T> Ant;
+        public CCelulaDup<T> Prox;
+
+        public CCelulaDup()
         {
             Item = default(T);
+            Ant = null;
             Prox = null;
-        }
-        public CCelula(T valordoItem)
-        {
-            Item = valordoItem;
-            Prox = null;
-        }
-        public CCelula(T valordoItem, CCelula<T> proxCelula)
-        {
-            Item = valordoItem;
-            Prox = proxCelula;
         }
 
-    }
-    #endregion
-    #region CFila
-    public class CFila<T> : IEnumerable<T>
-    {
-        private CCelula<T> Frente;
-        private CCelula<T> Tras;
-        private int Qtde = 0;
-        public CFila()
+        public CCelulaDup(T valorItem)
         {
-            Frente = new CCelula<T>();
-            Tras = Frente;
+            Item = valorItem;
+            Ant = null;
+            Prox = null;
         }
-        public bool EstaVazia() => Frente == Tras;
-        public void Enfileira(T valorItem)
+
+        public CCelulaDup(T valorItem, CCelulaDup<T> celulaAnt, CCelulaDup<T> proxCelula)
         {
-            Tras.Prox = new CCelula<T>(valorItem);
-            Tras = Tras.Prox;
+            Item = valorItem;
+            Ant = celulaAnt;
+            Prox = proxCelula;
+        }
+    }
+
+    public class CListaDup<T> : IEnumerable<T>
+    {
+        private CCelulaDup<T> Primeira;
+        private CCelulaDup<T> Ultima;
+        private int Qtde = 0;
+
+        public CListaDup()
+        {
+            Primeira = new CCelulaDup<T>();
+            Ultima = Primeira;
+        }
+
+        public bool Vazia() => Primeira == Ultima;
+
+        public void InsereFim(T valorItem)
+        {
+            Ultima.Prox = new CCelulaDup<T>(valorItem, Ultima, null);
+            Ultima = Ultima.Prox;
             Qtde++;
         }
-        public T Desenfileira()
+
+        public void InsereComeco(T valorItem)
         {
-            if (Frente != Tras)
+            if (Primeira == Ultima)
             {
-                Frente = Frente.Prox;
-                T item = Frente.Item;
+                Ultima.Prox = new CCelulaDup<T>(valorItem, Ultima, null);
+                Ultima = Ultima.Prox;
+            }
+            else
+            {
+                Primeira.Prox = new CCelulaDup<T>(valorItem, Primeira, Primeira.Prox);
+                Primeira.Prox.Prox.Ant = Primeira.Prox;
+            }
+            Qtde++;
+        }
+
+        public void RemoveComecoSemRetorno()
+        {
+            if (Primeira != Ultima)
+            {
+                Primeira = Primeira.Prox;
+                Primeira.Ant = null;
                 Qtde--;
-                return item;
+            }
+        }
+
+        public void Imprime()
+        {
+            CCelulaDup<T> aux = Primeira.Prox;
+            while (aux != null)
+            {
+                Console.WriteLine(aux.Item);
+                aux = aux.Prox;
+            }
+        }
+
+        public T RetornaIndice(int Posicao)
+        {
+            if ((Posicao >= 1) && (Posicao <= Qtde) && (Primeira != Ultima))
+            {
+                CCelulaDup<T> aux = Primeira.Prox;
+                for (int i = 1; i < Posicao; i++, aux = aux.Prox) ;
+                if (aux != null)
+                    return aux.Item;
             }
             return default(T);
         }
-        public T Peek() => Frente != Tras ? Frente.Prox.Item : default(T);
-        public bool Contem(T valorItem)
-        {
-            for (CCelula<T> aux = Frente.Prox; aux != null; aux = aux.Prox)
-                if (EqualityComparer<T>.Default.Equals(aux.Item,
-                valorItem))
-                    return true;
-            return false;
-        }
+
         public int Quantidade() => Qtde;
+
         public IEnumerator<T> GetEnumerator()
         {
-            for (var aux = Frente.Prox; aux != null; aux = aux.Prox)
+            for (CCelulaDup<T> aux = Primeira.Prox; aux != null; aux = aux.Prox)
                 yield return aux.Item;
         }
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
-    
-        public static CFila<T> ConcatenaFila(CFila<T> F1, CFila<T> F2){
-            CFila<T> aux = new CFila<T>();
-            for (CCelula<T> x = F1.Tras; x.Prox != null; x = x.Prox)
-            {
-                aux.Inserir(x.Prox.Item);
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public int primeiraOcorrenciaDe(T elemento){
+            if (Qtde <= 0){
+                return -1;
             }
-            for (CCelula<T> x = L2.Primeira; x.Prox != null; x = x.Prox)
-            {
-                aux.Inserir(x.Prox.Item);
+            for (int a = 1; a <= Qtde; a++){
+                if (RetornaIndice(a).Equals(elemento)){
+                    return a;
+                }
             }
-            return aux;
+            return -1;
+        }
+
+        public int ultimaOcorrenciaDe(T elemento){
+            if (Qtde <= 0){
+                return -1;
+            }
+            for (int a = Qtde; a >= 1; a--){
+                if (RetornaIndice(a).Equals(elemento)){
+                    return a;
+                }
+            }
+            return -1;
         }
     }
-        #endregion
-    class Program
-    {
-        public static void Main()
-        {
-            
+
+    class Program{
+        public static void Main(){
+            CListaDup<int> lista = new CListaDup<int>();
+            lista.InsereFim(10);
+            lista.InsereFim(20);
+            lista.InsereFim(30);
+            lista.InsereFim(20);
+            lista.InsereFim(40);
+            int indice = lista.ultimaOcorrenciaDe(20);
+            if (indice >= 0){
+                Console.WriteLine("Última ocorrência está na posição "+indice);
+            }
+            else{
+                Console.WriteLine("Não tem na lista");
+            }
         }
     }
 }
