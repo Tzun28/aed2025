@@ -1,0 +1,143 @@
+using System;
+using System.Collections.Generic;
+namespace AED
+{
+    public class CCelula<T>
+    {
+        public T Item;
+        public CCelula<T> Prox;
+        public CCelula()
+        {
+            Item = default(T);
+            Prox = null;
+        }
+        public CCelula(T valordoItem)
+        {
+            Item = valordoItem;
+            Prox = null;
+        }
+        public CCelula(T valordoItem, CCelula<T> proxCelula)
+        {
+            Item = valordoItem;
+            Prox = proxCelula;
+        }
+    }
+
+    class CListaSimples<T>
+    {
+        private CCelula<T> primeira, ultima;
+
+        public CListaSimples()
+        {
+            primeira = null;
+            ultima = null;
+        }
+
+        public bool vazia()
+        {
+            return (primeira == null);
+        }
+
+        public void insereComeco(T valorItem)
+        {
+            CCelula<T> nova = new CCelula<T>(valorItem);
+            nova.Prox = primeira;
+            primeira = nova;
+            if (ultima == null)
+            {
+                ultima = nova;
+            }
+        }
+
+        public T removeComeco()
+        {
+            if (vazia())
+            {
+                Console.WriteLine("A lista esá vazia");
+                return default(T);
+            }
+            T itemRemovido = primeira.Item;
+            primeira = primeira.Prox;
+            if (primeira == null)
+            {
+                ultima = null;
+            }
+            return itemRemovido;
+        }
+
+        public void insereFim(T valorItem)
+        {
+            CCelula<T> nova = new CCelula<T>(valorItem);
+            if (vazia())
+            {
+                primeira = nova;
+                ultima = nova;
+            }
+            else
+            {
+                ultima.Prox = nova;
+                ultima = nova;
+            }
+        }
+        public T removeFim()
+        {
+            if (vazia())
+            {
+                Console.WriteLine("A lista esá vazia");
+                return default(T);
+            }
+            T itemRemovido = ultima.Item;
+            if (primeira == ultima)
+            {
+                primeira = null;
+                ultima = null;
+            }
+            else
+            {
+                CCelula<T> aux = primeira;
+                while (aux.Prox != ultima)
+                {
+                    aux = aux.Prox;
+                }
+                aux.Prox = null;
+                ultima = aux;
+            }
+            return itemRemovido;
+        }
+
+        public void imprime()
+        {
+            CCelula<T> aux = primeira;
+            while (aux != null)
+            {
+                Console.Write(aux.Item + " ");
+                aux = aux.Prox;
+            }
+            Console.WriteLine();
+        }
+        public bool contem(T tal)
+        {
+            CCelula<T> aux = primeira;
+            while (aux != null)
+            {
+                if (aux.Item.Equals(tal))
+                {
+                    return true;
+                }
+                aux = aux.Prox;
+            }
+            return false;
+        }
+    }
+    class Program
+    {
+        public static void Main()
+        {
+            CListaSimples<int> lista = new CListaSimples<int>();
+            lista.insereFim(10);
+            lista.insereFim(20);
+            lista.insereFim(30);
+            lista.imprime();
+        }
+    }
+}

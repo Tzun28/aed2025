@@ -1,102 +1,88 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 namespace AED
 {
-    public class CCelulaDup<T>
+    public class CCelula<T>
     {
         public T Item;
-        public CCelulaDup<T> Ant;
-        public CCelulaDup<T> Prox;
-        public CCelulaDup()
+        public CCelula<T> Prox;
+        public CCelula()
         {
             Item = default(T);
-            Ant = null;
             Prox = null;
         }
-        public CCelulaDup(T valorItem)
+        public CCelula(T valorItem)
         {
             Item = valorItem;
-            Ant = null;
             Prox = null;
         }
-        public CCelulaDup(T valorItem, CCelulaDup<T> celulaAnt, CCelulaDup<T> proxCelula)
+        public CCelula(T valorItem, CCelula<T> proxCelula)
         {
             Item = valorItem;
-            Ant = celulaAnt;
             Prox = proxCelula;
         }
     }
-    public class Deque<T>
+
+    public class CFila<T>
     {
-        private CCelulaDup<T> Primeira;
-        private CCelulaDup<T> Ultima;
+        private CCelula<T> Frente;
+        private CCelula<T> Tras;
         private int Qtde = 0;
-        public Deque()
+        public CFila()
         {
-            Primeira = new CCelulaDup<T>();
-            Ultima = new CCelulaDup<T>(default(T),null,Primeira);
-            Primeira.Ant = Ultima;
+            Frente = new CCelula<T>();
+            Tras = Frente;
         }
-        
-        public bool isEmpty()
+        public bool EstaVazia() => Frente == Tras;
+        public void Enfileira(T valorItem)
         {
-            if (Qtde <= 0){return true;}
-            else return false;
-        }
-        public int ssize()
-        {
-            return Qtde;
-        }
-        public void pushLeft(T item)
-        {   
-            Ultima.Item = item;
-            Ultima.Ant = new CCelulaDup<T>(default(T), null, Ultima);
-            Ultima = Ultima.Ant;
+            Tras.Prox = new CCelula<T>(valorItem);
+            Tras = Tras.Prox;
             Qtde++;
         }
-        public void pushRight(T item)
+        public T Desenfileira()
         {
-            Primeira.Item = item;
-            Primeira.Prox = new CCelulaDup<T>(default(T),Primeira,null);
-            Primeira = Primeira.Prox;
+            if (Frente != Tras)
+            {
+                Frente = Frente.Prox;
+                T item = Frente.Item;
+                Qtde--;
+                return item;
+            }
+            return default(T);
+        }
+        public T Peek() => Frente != Tras ? Frente.Prox.Item : default(T);
+        public bool Contem(T valorItem)
+        {
+            for (CCelula<T> aux = Frente.Prox; aux != null; aux = aux.Prox)
+                if (aux.Item.Equals(valorItem))
+                    return true;
+            return false;
+        }
+        public int Quantidade() => Qtde;
+
+        public void FuraFila(T elemento)
+        {
+            Frente.Prox = new CCelula<T>(elemento, Frente.Prox);
+            if (Frente.Prox.Prox == null)
+            {
+                Tras = Frente.Prox;
+            }
             Qtde++;
-        }
-        public T popLeft()
-        {
-            if (Qtde == 0){  Console.WriteLine("Não há ccélulas dentro da Deque"); return default(T);}
-            T aux = Ultima.Prox.Item;
-            Ultima = Ultima.Prox;
-            Ultima.Ant = null;
-            Qtde--;
-            return aux;
-        }
-        public T popRight()
-        {
-            if (Qtde == 0){  Console.WriteLine("Não há ccélulas dentro da Deque"); return default(T);}
-            T aux = Primeira.Ant.Item;
-            Primeira = Primeira.Ant;
-            Primeira.Prox = null;
-            Primeira.Item = default(T);
-            Qtde--;
-            return aux;
         }
     }
-    class Program{
-        public static void Main(){
-            Deque<int> Aeddois = new Deque<int>();
-            Aeddois.pushRight(15);
-            Aeddois.pushRight(30);
-            Aeddois.pushRight(60);
-            Aeddois.pushLeft(10);
-            Aeddois.pushLeft(5);
-            Aeddois.pushLeft(2);
-            Console.WriteLine("Valor mais a esquerda "+ Aeddois.popLeft());
-            Console.WriteLine("Valor mais a direita {0}", Aeddois.popRight());
-            Console.WriteLine("Valor mais a esquerda "+ Aeddois.popLeft());
-            Console.WriteLine("Valor mais a esquerda "+ Aeddois.popLeft());
-            Console.WriteLine("Valor mais a esquerda "+ Aeddois.popLeft());
-            Console.WriteLine("Valor mais a direita {0}", Aeddois.popRight());
-            Aeddois.popRight();
+
+    class Program
+    {
+        public static void Main()
+        {
+            CFila<int> fila = new CFila<int>();
+            fila.Enfileira(1);
+            fila.Enfileira(2);
+            fila.FuraFila(99); 
+            Console.WriteLine(fila.Desenfileira());
+            Console.WriteLine(fila.Desenfileira());
+            Console.WriteLine(fila.Desenfileira());
         }
     }
 }

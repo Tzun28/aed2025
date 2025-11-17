@@ -1,0 +1,158 @@
+using System;
+using System.Collections;
+namespace AED
+{
+    class CCelulaDicionario<TK, TV> 
+    { 
+        public TK key; 
+        public TV value; 
+        public CCelulaDicionario<TK, TV> prox; 
+        public CCelulaDicionario() 
+        {  key = default(TK);
+            value = default(TV);
+            prox = null;
+        } 
+        public CCelulaDicionario(TK chave, TV valor)
+        {
+            key = chave;
+            value = valor;
+            prox = null;
+        } 
+        public CCelulaDicionario(TK chave, TV valor, CCelulaDicionario<TK, TV> proxima) 
+        {    
+            key = chave;
+            value = valor;
+            prox = proxima;
+        } 
+    } 
+    class CDicionario<TK, TV> 
+    { 
+        private CCelulaDicionario<TK, TV> primeira, ultima;
+        public CDicionario()
+        {
+            primeira = new CCelulaDicionario<TK, TV>();
+            ultima = primeira;
+        } 
+
+        public bool vazio()
+        {
+            if (primeira == ultima){return true;}
+            else {return false;}
+        }
+        public void adiciona(TK chave, TV valor)
+        {
+            CCelulaDicionario<TK,TV> aux = ultima;
+            bool confereexiste = false;
+            while (aux.prox != null)
+            {
+                aux = aux.prox;
+                if (aux.key.Equals(chave))
+                {
+                    confereexiste = true;
+                }
+            }
+            if (confereexiste == true)
+            {
+            }
+            else{
+                primeira.prox = new CCelulaDicionario<TK, TV>(chave, valor);
+                primeira = primeira.prox;
+            }
+        } 
+
+        public TV recebeValor(TK chave) 
+        {
+            CCelulaDicionario<TK,TV> aux = ultima; 
+            while (aux.prox != null)
+            {
+                if (aux.prox.key.Equals(chave))
+                {
+                    return aux.prox.value;
+                }
+                aux = aux.prox;
+            }
+            
+            Console.WriteLine("Trinca não encontrada.");
+            return default(TV);
+        } 
+    }
+    class Program
+    {
+        public static void Main()
+        {
+            CDicionario<string,string> aminoacidos = new CDicionario<string, string>();
+            //Bloco U
+            aminoacidos.adiciona("UUU", "Fenilalanina");
+            aminoacidos.adiciona("UUC", "Fenilalanina");
+            aminoacidos.adiciona("UUA", "Leucina");
+            aminoacidos.adiciona("UUG", "Leucina");
+            aminoacidos.adiciona("UCU", "Serina");
+            aminoacidos.adiciona("UCC", "Serina");
+            aminoacidos.adiciona("UCA", "Serina");
+            aminoacidos.adiciona("UCG", "Serina");
+            aminoacidos.adiciona("UAU", "Tirosina");
+            aminoacidos.adiciona("UAC", "Tirosina");
+            aminoacidos.adiciona("UAA", "Parada");
+            aminoacidos.adiciona("UAG", "Parada");
+            aminoacidos.adiciona("UGU", "Cisteína");
+            aminoacidos.adiciona("UGC", "Cisteína");
+            aminoacidos.adiciona("UGA", "Parada");
+            aminoacidos.adiciona("UGG", "Triptofano");
+            //Bloco C
+            aminoacidos.adiciona("CUU", "Leucina");
+            aminoacidos.adiciona("CUC", "Leucina");
+            aminoacidos.adiciona("CUA", "Leucina");
+            aminoacidos.adiciona("CUG", "Leucina");
+            aminoacidos.adiciona("CCU", "Prolina");
+            aminoacidos.adiciona("CCC", "Prolina");
+            aminoacidos.adiciona("CCA", "Prolina");
+            aminoacidos.adiciona("CCG", "Prolina");
+            aminoacidos.adiciona("CAU", "Hidistina");
+            aminoacidos.adiciona("CAC", "Hidistina");
+            aminoacidos.adiciona("CAA", "Glutamina");
+            aminoacidos.adiciona("CAG", "Glutamina");
+            aminoacidos.adiciona("CGU", "Arginina");
+            aminoacidos.adiciona("CGC", "Arginina");
+            aminoacidos.adiciona("CGA", "Arginina");
+            aminoacidos.adiciona("CGG", "Arginina");
+            //Bloco A
+            aminoacidos.adiciona("AUU", "Isoleucina");
+            aminoacidos.adiciona("AUC", "Isoleucina");
+            aminoacidos.adiciona("AUA", "Isoleucina");
+            aminoacidos.adiciona("AUG", "Metionina");
+            aminoacidos.adiciona("ACU", "Treonina");
+            aminoacidos.adiciona("ACC", "Treonina");
+            aminoacidos.adiciona("ACA", "Treonina");
+            aminoacidos.adiciona("ACG", "Treonina"); 
+            aminoacidos.adiciona("AAU", "Asparagina");
+            aminoacidos.adiciona("AAC", "Asparagina");
+            aminoacidos.adiciona("AAA", "Lisina");
+            aminoacidos.adiciona("AAG", "Lisina");
+            aminoacidos.adiciona("AGU", "Serina");
+            aminoacidos.adiciona("AGC", "Serina");
+            aminoacidos.adiciona("AGA", "Arginina");
+            aminoacidos.adiciona("AGG", "Arginina");
+            //Bloco G
+            aminoacidos.adiciona("GUU", "Valina");
+            aminoacidos.adiciona("GUC", "Valina");
+            aminoacidos.adiciona("GUA", "Valina");
+            aminoacidos.adiciona("GUG", "Valina");
+            aminoacidos.adiciona("GCU", "Alanina");
+            aminoacidos.adiciona("GCC", "Alanina");
+            aminoacidos.adiciona("GCA", "Alanina"); 
+            aminoacidos.adiciona("GCG", "Alanina");
+            aminoacidos.adiciona("GAU", "Aspartato");
+            aminoacidos.adiciona("GAC", "Aspartato");
+            aminoacidos.adiciona("GAA", "Glutamato");
+            aminoacidos.adiciona("GAG", "Glutamato");
+            aminoacidos.adiciona("GGU", "Glicina");
+            aminoacidos.adiciona("GGC", "Glicina");
+            aminoacidos.adiciona("GGA", "Glicina");
+            aminoacidos.adiciona("GGG", "Glicina");
+            Console.WriteLine("Digite a trinca de nucleotídeos ");
+            string trinca = Console.ReadLine().ToUpper(); 
+            string resultado = aminoacidos.recebeValor(trinca);
+                 Console.WriteLine("Aminoácido: " + resultado);
+        }
+    }
+}

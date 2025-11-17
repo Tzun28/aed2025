@@ -1,0 +1,91 @@
+using System;
+
+namespace AED
+{
+	public class CCelula<T>
+	{
+		public T Item;
+		public CCelula<T> Prox;
+		public CCelula()
+		{
+			Item = default(T);
+			Prox = null;
+		}
+		public CCelula(T valorItem)
+		{
+			Item = valorItem;
+			Prox = null;
+		}
+		public CCelula(T valorItem, CCelula<T> proxCelula)
+		{
+			Item = valorItem;
+			Prox = proxCelula;
+		}
+	}
+
+	public class CPilha<T>
+	{
+		private CCelula<T> Topo = null;
+		private int Qtde = 0;
+		public bool EstaVazia() => Topo == null;
+		public void Empilha(T valorItem)
+		{
+			Topo = new CCelula<T>(valorItem, Topo);
+			Qtde++;
+		}
+		public T Desempilha()
+		{
+			if (Topo != null)
+			{
+				T item = Topo.Item;
+				Topo = Topo.Prox;
+				Qtde--;
+				return item;
+			}
+			return default(T);
+		}
+		public T Peek() => Topo != null ? Topo.Item : default(T);
+		public bool Contem(T valorItem)
+		{
+			for (var aux = Topo; aux != null; aux = aux.Prox)
+				if (aux.Item.Equals(valorItem))
+					return true;
+			return false;
+		}
+		public int Quantidade() => Qtde;
+
+		public void inverte()
+		{
+			if (Topo == null || Topo.Prox == null)
+				return;
+
+			CCelula<T> anterior = null;
+			CCelula<T> atual = Topo;
+			CCelula<T> proximo = null;
+
+			while (atual != null)
+			{
+				proximo = atual.Prox;
+				atual.Prox = anterior;
+				anterior = atual;
+				atual = proximo;
+			}
+			Topo = anterior;
+		}
+	}
+
+	class Program
+	{
+		public static void Main()
+		{
+			CPilha<int> P = new CPilha<int>();
+			P.Empilha(1);
+			P.Empilha(2);
+			P.Empilha(3); 
+			P.inverte();
+			Console.WriteLine(P.Desempilha());
+			Console.WriteLine(P.Desempilha());
+			Console.WriteLine(P.Desempilha());
+		}
+	}
+}

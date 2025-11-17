@@ -1,0 +1,112 @@
+using System;
+using System.Collections;
+namespace AED
+{
+    class CCelulaDicionario<TK, TV> 
+    { 
+        public TK key; 
+        public TV value; 
+        public CCelulaDicionario<TK, TV> prox; 
+        public CCelulaDicionario() 
+        {  key = default(TK);
+            value = default(TV);
+            prox = null;
+        } 
+        public CCelulaDicionario(TK chave, TV valor)
+        {
+            key = chave;
+            value = valor;
+            prox = null;
+        } 
+        public CCelulaDicionario(TK chave, TV valor, CCelulaDicionario<TK, TV> proxima) 
+        {    
+            key = chave;
+            value = valor;
+            prox = proxima;
+        } 
+    } 
+ 
+    class CDicionario<TK, TV> 
+    { 
+        private CCelulaDicionario<TK, TV> primeira, ultima;
+        public CDicionario()
+        {
+            primeira = new CCelulaDicionario<TK, TV>();
+            ultima = primeira;
+        } 
+
+        public bool vazio()
+        {
+            if (primeira == ultima){return true;}
+            else {return false;}
+        }
+        public void adiciona(TK chave, TV valor)
+        {
+        CCelulaDicionario<TK,TV> aux = ultima;
+        bool confereexiste = false;
+        while (aux.prox != null)
+            {
+                aux = aux.prox;
+                if (aux.key.Equals(chave))
+                {
+                    confereexiste = true;
+                }
+            }
+            if (confereexiste == true)
+            {
+                
+            }
+            else{
+            primeira.prox = new CCelulaDicionario<TK, TV>(chave, valor);
+            primeira = primeira.prox;
+            }
+            
+        } 
+
+        public TV recebeValor(TK chave) 
+        {
+        CCelulaDicionario<TK,TV> aux = ultima;
+        while (aux.prox != null)
+            {
+                if (aux.prox.key.Equals(chave))
+                {
+                    return aux.prox.value;
+                }
+                aux = aux.prox;
+            }
+            Console.WriteLine("Não foi encontrado o enderenço ip desse site");
+            return default(TV);
+        } 
+    }
+    class Program
+    {
+
+        public static void Main()
+        {
+            CDicionario<string,string> ips = new CDicionario<string, string>();
+            ips.adiciona("www.google.com", "216.239.38.120");
+            ips.adiciona("www.pucminas.br", "200.229.32.28");
+            ips.adiciona("www.gmail.com", "172.217.28.197");
+            ips.adiciona("www.youtube.com", "172.217.162.14");
+            ips.adiciona("www.capes.com", "23.227.38.74");
+            ips.adiciona("www.yahoo.com", "200.152.162.137");
+            ips.adiciona("www.microsoft.com", "23.212.153.219");
+            ips.adiciona("www.x.com", "162.159.140.229");
+            ips.adiciona("www.brasil.gov.br", "170.246.255.242");
+            ips.adiciona("www.wikipedia.com", "195.200.68.226");
+            ips.adiciona("www.amazom.com", "3.33.139.32");
+            ips.adiciona("research.microsoft.com", "20.112.250.133");
+            ips.adiciona("www.facebook.com", "157.240.12.35");
+            ips.adiciona("www.whitehouse.gov", "192.0.66.51");
+            ips.adiciona("www.answers.com", "151.101.92.203");
+            ips.adiciona("www.uol.com.br", "108.158.122.45");
+            ips.adiciona("www.hotmail.com", "204.79.197.212");
+            ips.adiciona("www.cplusplus.com", "54.39.7.252");
+            ips.adiciona("www.nyt.com", "151.101.93.164");
+            ips.adiciona("www.apple.com", "95.101.145.8");
+            Console.WriteLine("Digite o site que deseja consultar o ip");
+            string site = Console.ReadLine();
+            Console.WriteLine(ips.recebeValor(site));
+        }
+    }
+}

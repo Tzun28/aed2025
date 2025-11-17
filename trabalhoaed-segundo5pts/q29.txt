@@ -1,0 +1,88 @@
+using System;
+using System.Collections.Generic;
+namespace AED
+{
+    public class CCelula<T>
+    {
+        public T Item;
+        public CCelula<T> Prox;
+        public CCelula()
+        {
+            Item = default(T);
+            Prox = null;
+        }
+        public CCelula(T valorItem)
+        {
+            Item = valorItem;
+            Prox = null;
+        }
+        public CCelula(T valorItem, CCelula<T> proxCelula)
+        {
+            Item = valorItem;
+            Prox = proxCelula;
+        }
+    }
+
+    public class CFila<T>
+    {
+        private CCelula<T> Frente;
+        private CCelula<T> Tras;
+        private int Qtde = 0;
+        public CFila()
+        {
+            Frente = new CCelula<T>();
+            Tras = Frente;
+        }
+        public bool EstaVazia() => Frente == Tras;
+        public void Enfileira(T valorItem)
+        {
+            Tras.Prox = new CCelula<T>(valorItem);
+            Tras = Tras.Prox;
+            Qtde++;
+        }
+        public T Desenfileira()
+        {
+            if (Frente != Tras)
+            {
+                Frente = Frente.Prox;
+                T item = Frente.Item;
+                Qtde--;
+                return item;
+            }
+            return default(T);
+        }
+        public T Peek() => Frente != Tras ? Frente.Prox.Item : default(T);
+        public bool Contem(T valorItem)
+        {
+            for (CCelula<T> aux = Frente.Prox; aux != null; aux = aux.Prox)
+                if (aux.Item.Equals(valorItem))
+                    return true;
+            return false;
+        }
+        public int Quantidade() => Qtde;
+
+        public void FuraFila(T elemento)
+        {
+            Frente.Prox = new CCelula<T>(elemento, Frente.Prox);
+            if (Frente.Prox.Prox == null)
+            {
+                Tras = Frente.Prox;
+            }
+            Qtde++;
+        }
+    }
+
+    class Program
+    {
+        public static void Main()
+        {
+            CFila<int> fila = new CFila<int>();
+            fila.Enfileira(1);
+            fila.Enfileira(2);
+            fila.FuraFila(99); 
+            Console.WriteLine(fila.Desenfileira());
+            Console.WriteLine(fila.Desenfileira());
+            Console.WriteLine(fila.Desenfileira());
+        }
+    }
+}
