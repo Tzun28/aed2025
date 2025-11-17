@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-
 namespace AED
 {
     public class CCelulaDup<T>
@@ -8,21 +7,18 @@ namespace AED
         public T Item;
         public CCelulaDup<T> Ant;
         public CCelulaDup<T> Prox;
-
         public CCelulaDup()
         {
             Item = default(T);
             Ant = null;
             Prox = null;
         }
-
         public CCelulaDup(T valorItem)
         {
             Item = valorItem;
             Ant = null;
             Prox = null;
         }
-
         public CCelulaDup(T valorItem, CCelulaDup<T> celulaAnt, CCelulaDup<T> proxCelula)
         {
             Item = valorItem;
@@ -30,125 +26,77 @@ namespace AED
             Prox = proxCelula;
         }
     }
-
-    public class CListaDup<T> : IEnumerable<T>
+    public class Deque<T>
     {
         private CCelulaDup<T> Primeira;
         private CCelulaDup<T> Ultima;
         private int Qtde = 0;
-
-        public CListaDup()
+        public Deque()
         {
             Primeira = new CCelulaDup<T>();
-            Ultima = Primeira;
+            Ultima = new CCelulaDup<T>(default(T),null,Primeira);
+            Primeira.Ant = Ultima;
         }
-
-        public bool Vazia() => Primeira == Ultima;
-
-        public void InsereFim(T valorItem)
+        
+        public bool isEmpty()
         {
-            Ultima.Prox = new CCelulaDup<T>(valorItem, Ultima, null);
+            if (Qtde <= 0){return true;}
+            else return false;
+        }
+        public int ssize()
+        {
+            return Qtde;
+        }
+        public void pushLeft(T item)
+        {   
+            Ultima.Item = item;
+            Ultima.Ant = new CCelulaDup<T>(default(T), null, Ultima);
+            Ultima = Ultima.Ant;
+            Qtde++;
+        }
+        public void pushRight(T item)
+        {
+            Primeira.Item = item;
+            Primeira.Prox = new CCelulaDup<T>(default(T),Primeira,null);
+            Primeira = Primeira.Prox;
+            Qtde++;
+        }
+        public T popLeft()
+        {
+            if (Qtde == 0){  Console.WriteLine("Não há ccélulas dentro da Deque"); return default(T);}
+            T aux = Ultima.Prox.Item;
             Ultima = Ultima.Prox;
-            Qtde++;
+            Ultima.Ant = null;
+            Qtde--;
+            return aux;
         }
-
-        public void InsereComeco(T valorItem)
+        public T popRight()
         {
-            if (Primeira == Ultima)
-            {
-                Ultima.Prox = new CCelulaDup<T>(valorItem, Ultima, null);
-                Ultima = Ultima.Prox;
-            }
-            else
-            {
-                Primeira.Prox = new CCelulaDup<T>(valorItem, Primeira, Primeira.Prox);
-                Primeira.Prox.Prox.Ant = Primeira.Prox;
-            }
-            Qtde++;
-        }
-
-        public void RemoveComecoSemRetorno()
-        {
-            if (Primeira != Ultima)
-            {
-                Primeira = Primeira.Prox;
-                Primeira.Ant = null;
-                Qtde--;
-            }
-        }
-
-        public void Imprime()
-        {
-            CCelulaDup<T> aux = Primeira.Prox;
-            while (aux != null)
-            {
-                Console.WriteLine(aux.Item);
-                aux = aux.Prox;
-            }
-        }
-
-        public T RetornaIndice(int Posicao)
-        {
-            if ((Posicao >= 1) && (Posicao <= Qtde) && (Primeira != Ultima))
-            {
-                CCelulaDup<T> aux = Primeira.Prox;
-                for (int i = 1; i < Posicao; i++, aux = aux.Prox) ;
-                if (aux != null)
-                    return aux.Item;
-            }
-            return default(T);
-        }
-
-        public int Quantidade() => Qtde;
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            for (CCelulaDup<T> aux = Primeira.Prox; aux != null; aux = aux.Prox)
-                yield return aux.Item;
-        }
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-        public int primeiraOcorrenciaDe(T elemento){
-            if (Qtde <= 0){
-                return -1;
-            }
-            for (int a = 1; a <= Qtde; a++){
-                if (RetornaIndice(a).Equals(elemento)){
-                    return a;
-                }
-            }
-            return -1;
-        }
-
-        public int ultimaOcorrenciaDe(T elemento){
-            if (Qtde <= 0){
-                return -1;
-            }
-            for (int a = Qtde; a >= 1; a--){
-                if (RetornaIndice(a).Equals(elemento)){
-                    return a;
-                }
-            }
-            return -1;
+            if (Qtde == 0){  Console.WriteLine("Não há ccélulas dentro da Deque"); return default(T);}
+            T aux = Primeira.Ant.Item;
+            Primeira = Primeira.Ant;
+            Primeira.Prox = null;
+            Primeira.Item = default(T);
+            Qtde--;
+            return aux;
         }
     }
-
     class Program{
         public static void Main(){
-            CListaDup<int> lista = new CListaDup<int>();
-            lista.InsereFim(10);
-            lista.InsereFim(20);
-            lista.InsereFim(30);
-            lista.InsereFim(20);
-            lista.InsereFim(40);
-            int indice = lista.ultimaOcorrenciaDe(20);
-            if (indice >= 0){
-                Console.WriteLine("Última ocorrência está na posição "+indice);
-            }
-            else{
-                Console.WriteLine("Não tem na lista");
-            }
+            Deque<int> Aeddois = new Deque<int>();
+            Aeddois.pushRight(15);
+            Aeddois.pushRight(30);
+            Aeddois.pushRight(60);
+            Aeddois.pushLeft(10);
+            Aeddois.pushLeft(5);
+            Aeddois.pushLeft(2);
+            Console.WriteLine("Valor mais a esquerda "+ Aeddois.popLeft());
+            Console.WriteLine("Valor mais a direita {0}", Aeddois.popRight());
+            Console.WriteLine("Valor mais a esquerda "+ Aeddois.popLeft());
+            Console.WriteLine("Valor mais a esquerda "+ Aeddois.popLeft());
+            Console.WriteLine("Valor mais a esquerda "+ Aeddois.popLeft());
+            Console.WriteLine("Valor mais a direita {0}", Aeddois.popRight());
+            Aeddois.popRight();
         }
     }
 }
