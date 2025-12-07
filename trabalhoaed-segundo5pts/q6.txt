@@ -1,0 +1,108 @@
+using System;
+using System.Collections.Generic;
+namespace AED
+{
+    #region Classe CCelula - Esse tal de region aparentemente é para ocultar essa parte do código mais fácil
+    public class CCelula<T>//Declaração de classe ccelula com dado genérico
+    {
+        public T Item;
+        public CCelula<T> Prox;
+        public CCelula()
+        {
+            Item = default(T);
+            Prox = null;
+        }
+        public CCelula(T valordoItem)
+        {
+            Item = valordoItem;
+            Prox = null;
+        }
+        public CCelula(T valordoItem, CCelula<T> proxCelula)
+        {
+            Item = valordoItem;
+            Prox = proxCelula;
+        }
+
+    }
+    #endregion
+    #region Classe CPilha - CPilha (ou lista LIFO: last-in first-out)
+    public class CPilha<T>
+    {
+    private CCelula<T> Topo = null;
+    private int Qtde = 0;
+    public bool EstaVazia() => Topo == null;
+    public void Empilha(T valorItem)
+    {
+    Topo = new CCelula<T>(valorItem, Topo);
+    Qtde++;
+    }
+    public T Desempilha()
+    {
+    if (Topo != null)
+    {
+    T item = Topo.Item;
+    Topo = Topo.Prox;
+    Qtde--;
+    return item;
+    }
+    return default(T);
+    }
+    public T Peek() => Topo != null ? Topo.Item : default(T);
+    public bool Contem(T valorItem)
+    {
+    for (var aux = Topo; aux != null; aux = aux.Prox)
+    if (EqualityComparer<T>.Default.Equals(aux.Item,
+    valorItem))
+    return true;
+    return false;
+    }
+    public int Quantidade() => Qtde;
+    public static CPilha<T> ConcatenaPilha(CPilha<T> a, CPilha<T> b)
+        {
+            CPilha<T> soluco = new CPilha<T>();
+            for (CCelula<T> z = b.Topo; z != null; z = z.Prox)
+            {
+                CPilha<T> astrid = new CPilha<T>();
+                astrid.Empilha(z.Item);
+                soluco.Empilha(astrid.Desempilha());
+            }
+            for (CCelula<T> y = a.Topo; y != null; y = y.Prox)
+            {
+                CPilha<T> astrid = new CPilha<T>();
+                astrid.Empilha(y.Item);
+                soluco.Empilha(astrid.Desempilha());
+            }
+            return soluco;
+        }
+    public static void ImprimePilha(CPilha<T> bateria)
+        {
+            for (CCelula<T> z = bateria.Topo; z != null; z = z.Prox)
+            {
+                Console.WriteLine(z.Item);
+            }
+        }
+
+}
+#endregion
+    /*------------------------------------------------------------*/
+    class Program
+    {
+        public static void Main()
+        {
+            CPilha<int> P1 = new CPilha<int>();
+            CPilha<int> P2 = new CPilha<int>();
+            P1.Empilha(19);
+            P1.Empilha(33);
+            P1.Empilha(2);
+            P1.Empilha(4);
+            P2.Empilha(1);
+            P2.Empilha(2);
+            P2.Empilha(3);
+            P2.Empilha(4);
+            P2.Empilha(5);
+            CPilha<int> AmaisBsoquepilha = CPilha<int>.ConcatenaPilha(P1, P2);
+            CPilha<int>.ImprimePilha(AmaisBsoquepilha);
+
+        }
+    }
+}
