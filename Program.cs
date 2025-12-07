@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
+
 namespace AED
 {
     #region Classe CCelula - Esse tal de region aparentemente é para ocultar essa parte do código mais fácil
@@ -25,94 +26,64 @@ namespace AED
 
     }
     #endregion
-    #region CFila
-    public class CFila<T> : IEnumerable<T>
+    class RandomQueue<T>
     {
         private CCelula<T> Frente;
         private CCelula<T> Tras;
         private int Qtde = 0;
-        public CFila()
+        RandomQueue()
         {
             Frente = new CCelula<T>();
             Tras = Frente;
         }
-        public bool EstaVazia() => Frente == Tras;
-        public void Enfileira(T valorItem)
+        void Enqueue(T item)
         {
-            Tras.Prox = new CCelula<T>(valorItem);
+            Tras.Prox = new CCelula<T>(item);
             Tras = Tras.Prox;
             Qtde++;
         }
-        public T Desenfileira()
-        {
-            if (Frente != Tras)
-            {
-                Frente = Frente.Prox;
-                T item = Frente.Item;
-                Qtde--;
-                return item;
-            }
-            return default(T);
-        }
-        public T Peek() => Frente != Tras ? Frente.Prox.Item : default(T);
-        public bool Contem(T valorItem)
-        {
-            for (CCelula<T> aux = Frente.Prox; aux != null; aux = aux.Prox)
-                if (EqualityComparer<T>.Default.Equals(aux.Item,
-                valorItem))
-                    return true;
-            return false;
-        }
-        public int Quantidade() => Qtde;
-        public IEnumerator<T> GetEnumerator()
-        {
-            for (var aux = Frente.Prox; aux != null; aux = aux.Prox)
-                yield return aux.Item;
-        }
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public static CFila<T> ConcatenaFila(CFila<T> F1, CFila<T> F2)
+        bool IsEmpty()
         {
-            CFila<T> aux = new CFila<T>();
-            for (CCelula<T> x = F1.Frente.Prox; x != null; x = x.Prox)
-            {
-                aux.Enfileira(x.Item);
-            }
-            for (CCelula<T> x = F2.Frente.Prox; x != null; x = x.Prox)
-            {
-                aux.Enfileira(x.Item);
-            }
-            return aux;
+            if  (Qtde <= 0)
+                return true;
+            else
+                return false;
         }
 
-        public static void ImprimeFila(CFila<T> tal)
+    
+        Object Dequeue()
         {
-            for (CCelula<T> a = tal.Frente.Prox; a != null; a = a.Prox)
+            if (IsEmpty()){ return default(T);};
+            Random fila = new Random();
+            int posicaoDaCelulaSorteada = fila.Next(1, Qtde);
+            CCelula<T> aux = Frente.Prox;
+            for (int i = 0; i < posicaoDaCelulaSorteada; i++)
             {
-                Console.WriteLine(a.Item);
+                aux = aux.Prox;
             }
-        }
+            Frente.Prox = aux.Prox;
+            return aux.Item;
+
+        
+        Object Sample()
+            {
+            if (IsEmpty()){ return default(T);};
+            Random fila = new Random();
+            int posicaoDaCelulaSorteada = fila.Next(1, Qtde);
+            CCelula<T> aux = Frente.Prox;
+            for (int i = 0; i < posicaoDaCelulaSorteada; i++)
+            {
+                aux = aux.Prox;
+            }
+            return aux.Item;
+            }
+            ;
+
     }
-        #endregion
-        /*------------------------------------------------------------*/
+/*---------------------------------------------------------*/
     class Program
     {
-        public static void Main()
-        {
-            CFila<int> A = new CFila<int>();
-            CFila<int> B = new CFila<int>();
-            A.Enfileira(19);
-            A.Enfileira(33);
-            A.Enfileira(2);
-            A.Enfileira(4);
-            B.Enfileira(1);
-            B.Enfileira(2);
-            B.Enfileira(3);
-            B.Enfileira(4);
-            B.Enfileira(5);
-            CFila<int> AmaisB = CFila<int>.ConcatenaFila(A, B);
-            
-            CFila<int>.ImprimeFila(AmaisB);
-        }
+        RandomQueue<int> RQ = new RandomQueue<int>();
     }
 }
